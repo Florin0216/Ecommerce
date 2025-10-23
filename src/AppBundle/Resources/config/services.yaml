@@ -1,0 +1,16 @@
+services:
+
+    AppBundle\Controller\:
+        resource: "%kernel.project_dir%/src/AppBundle/Controller/*"
+        autowire: true
+        autoconfigure: true
+
+    AppBundle\Entity\:
+        resource: "%kernel.project_dir%/src/AppBundle/Entity/*"
+        autowire: true
+        autoconfigure: true
+
+    AppBundle\Repository\:
+        resource: "%kernel.project_dir%/src/AppBundle/Repository/*"
+        autowire: true
+        autoconfigure: true
