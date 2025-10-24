@@ -1,0 +1,4 @@
+shop_product_list:
+    path: /products
+    controller: ShopBundle\Controller\ProductController::listAction
+    methods: GET

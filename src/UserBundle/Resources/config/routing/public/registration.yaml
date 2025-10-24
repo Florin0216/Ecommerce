@@ -1,0 +1,4 @@
+user_registration_register:
+    path: /register.{_format}
+    controller: UserBundle\Controller\RegistrationController::register
+    methods: GET|POST

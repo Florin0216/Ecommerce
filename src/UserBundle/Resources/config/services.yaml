@@ -1,0 +1,30 @@
+services:
+    UserBundle\Controller\:
+        resource: "%kernel.project_dir%/src/UserBundle/Controller/*"
+        autowire: true
+        autoconfigure: true
+
+    UserBundle\Entity\:
+        resource: "%kernel.project_dir%/src/UserBundle/Entity/*"
+        autowire: true
+        autoconfigure: true
+
+    UserBundle\Repository\:
+        resource: "%kernel.project_dir%/src/UserBundle/Repository/*"
+        autowire: true
+        autoconfigure: true
+
+    UserBundle\Services\:
+        resource: "%kernel.project_dir%/src/UserBundle/Services/*"
+        autowire: true
+        autoconfigure: true
+
+    UserBundle\Form\:
+        resource: "%kernel.project_dir%/src/UserBundle/Form/*"
+        autowire: true
+        autoconfigure: true
+
+    UserBundle\Command\:
+        resource: "%kernel.project_dir%/src/UserBundle/Command/*"
+        autowire: true
+        autoconfigure: true

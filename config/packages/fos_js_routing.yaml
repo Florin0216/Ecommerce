@@ -1,3 +1,14 @@
 fos_js_routing:
     routes_to_expose:
+        # Homepage
         - public_app_homepage
+
+        # Product
+        - shop_product_list
+
+        # Registration
+        - user_registration_register
+
+        # Security
+        - user_security_login
+        - user_security_logout

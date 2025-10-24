@@ -1,0 +1,11 @@
+public_shop_import:
+    resource: "@ShopBundle/Resources/config/routing/public/_entrypoint.yaml"
+    prefix: /
+    defaults:
+        _format: 'html'
+
+admin_shop_import:
+    resource: "@ShopBundle/Resources/config/routing/admin/_entrypoint.yaml"
+    prefix: /admin
+    defaults:
+        _format: 'html'

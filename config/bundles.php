@@ -14,4 +14,6 @@ return [
     AppBundle\AppBundle::class => ['dev' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
+    ShopBundle\ShopBundle::class => ['dev' => true],
+    UserBundle\UserBundle::class => ['dev' => true],
 ];
