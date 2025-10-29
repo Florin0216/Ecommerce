@@ -28,3 +28,8 @@ services:
         resource: "%kernel.project_dir%/src/UserBundle/Command/*"
         autowire: true
         autoconfigure: true
+
+    UserBundle\Handler\:
+        resource: "%kernel.project_dir%/src/UserBundle/Handler/*"
+        autowire: true
+        autoconfigure: true

@@ -1,0 +1,19 @@
+admin_shop_product_list:
+    path: /products
+    controller: ShopBundle\Controller\ProductController::listAdminAction
+    methods: GET
+
+admin_shop_product_new:
+    path: /products/new
+    controller: ShopBundle\Controller\ProductController::newAdminAction
+    methods: POST
+
+admin_shop_product_edit:
+    path: /products/{id}/edit
+    controller: ShopBundle\Controller\ProductController::editAdminAction
+    methods: PUT
+
+admin_shop_product_delete:
+    path: /products/{id}/delete
+    controller: ShopBundle\Controller\ProductController::deleteAdminAction
+    methods: DELETE

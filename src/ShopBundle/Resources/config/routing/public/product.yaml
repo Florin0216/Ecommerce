@@ -1,4 +1,15 @@
+shop_product_products_list:
+    path: /api/products
+    controller: ShopBundle\Controller\ProductController::productsListAction
+    methods: GET
+
 shop_product_list:
-    path: /products
+    path: /category/{id}/products
     controller: ShopBundle\Controller\ProductController::listAction
     methods: GET
+
+shop_product_show:
+    path: /product/{id}/show
+    controller: ShopBundle\Controller\ProductController::showAction
+    methods: GET
+

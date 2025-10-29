@@ -7,39 +7,53 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ShopBundle\Repository\ProductRepository;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[Orm\Table(name: 'shop__product')]
+#[ORM\Table(name: 'shop__product')]
 class Product
 {
+    const ENTITY_ALIAS = 'pdt';
+
+    const NORMALIZER_GROUPS = ['product.details','category.details'];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
+    #[Groups('product.details')]
     protected ?int $id;
 
     #[ORM\Column(type: Types::STRING, length: 128)]
+    #[Groups('product.details')]
     protected ?string $name;
 
-    #[ORM\Column(type: Types::STRING, length: 256)]
+    #[ORM\Column(type: Types::TEXT)]
+    #[Groups('product.details')]
     protected ?string $description;
 
     #[ORM\Column(type: Types::STRING, length: 256)]
+    #[Groups('product.details')]
     protected ?string $summary;
 
     #[ORM\Column(type: Types::FLOAT)]
+    #[Groups('product.details')]
     protected ?float $price;
 
     #[ORM\Column(type: Types::INTEGER)]
-    protected ?float $stock;
+    #[Groups('product.details')]
+    protected ?int $stock;
 
     #[ORM\Column(type: Types::STRING, length: 128)]
+    #[Groups('product.details')]
     protected ?string $provider;
 
     #[ORM\Column(type: Types::STRING, length: 128)]
+    #[Groups('product.details')]
     protected ?string $delivery;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
     #[ORM\JoinTable(name: 'shop__product_category')]
+    #[Groups('category.details')]
     protected ?Collection $categories = null;
 
     public function __construct()
@@ -126,6 +140,17 @@ class Product
     public function setDelivery(?string $delivery): Product
     {
         $this->delivery = $delivery;
+        return $this;
+    }
+
+    public function getCategories(): ?Collection
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Collection $categories): Product
+    {
+        $this->categories = $categories;
         return $this;
     }
 

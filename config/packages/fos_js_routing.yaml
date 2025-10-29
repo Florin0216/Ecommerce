@@ -12,3 +12,23 @@ fos_js_routing:
         # Security
         - user_security_login
         - user_security_logout
+
+        # Product
+        - shop_product_products_list
+        - shop_product_list
+        - shop_product_show
+        - admin_shop_product_list
+        - admin_shop_product_new
+        - admin_shop_product_edit
+        - admin_shop_product_delete
+
+        # Category
+        - shop_category_categories_list
+        - shop_category_list
+        - admin_shop_category_list
+        - admin_shop_category_new
+        - admin_shop_category_edit
+        - admin_shop_category_delete
+
+        #User
+        - public_user_user_show

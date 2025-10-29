@@ -1,3 +1,7 @@
 public_shop_product_import:
     resource: "@ShopBundle/Resources/config/routing/public/product.yaml"
     prefix: /
+
+public_shop_category_import:
+    resource: "@ShopBundle/Resources/config/routing/public/category.yaml"
+    prefix: /

@@ -18,3 +18,9 @@ services:
         resource: "%kernel.project_dir%/src/AppBundle/Services/*"
         autowire: true
         autoconfigure: true
+
+    AppBundle\Vich\Uploader\Namer\:
+        resource: '%kernel.project_dir%/src/AppBundle/Vich/Uploader/Namer/*'
+        public: true
+        autowire: true
+        autoconfigure: true
