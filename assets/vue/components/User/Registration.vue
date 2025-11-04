@@ -4,12 +4,25 @@ import {ref} from "vue";
 import RegistrationService from "../../Services/RegistrationService";
 import RegisterDto from "../../dto/User/RegisterDto";
 import FosJsRouting from "../../../js/fosJsRouting";
+import CartService from "../../Services/CartService";
+import CartCreateDto from "../../dto/Cart/CartCreateDto";
+import ToastService from "../../Services/ToastService";
 
 const userData = ref({});
 
 const handleSubmit = () => {
     RegistrationService
         .register(new RegisterDto(userData.value))
+        .then((response) => {
+            return CartService.new(new CartCreateDto({
+                total: 0,
+                user: response.data?.data.id
+            }))
+        })
+        .then(() => {
+            ToastService.show("Account created successfully!", "success");
+            userData.value = {};
+        })
 }
 
 </script>
@@ -83,6 +96,7 @@ const handleSubmit = () => {
                         </label>
                         <div class="relative">
                             <input
+                                type="password"
                                 id="password"
                                 v-model="userData.password"
                                 class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 outline-none"
@@ -109,7 +123,8 @@ const handleSubmit = () => {
                 </div>
 
                 <div class="text-center">
-                    <a :href="FosJsRouting.generate('user_security_login')" class="text-indigo-600 hover:text-indigo-700 font-medium transition">
+                    <a :href="FosJsRouting.generate('user_security_login')"
+                       class="text-indigo-600 hover:text-indigo-700 font-medium transition">
                         Sign in instead
                     </a>
                 </div>

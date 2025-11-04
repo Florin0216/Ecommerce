@@ -1,0 +1,20 @@
+
+shop_cart_item_list:
+    path: /cart/{id}/cartItems
+    controller: ShopBundle\Controller\CartItemController::listAction
+    methods: GET
+
+shop_cart_item_new:
+    path: /cartItem/new
+    controller: ShopBundle\Controller\CartItemController::newAction
+    methods: POST
+
+shop_cart_item_edit:
+    path: /cartItem/{id}/edit
+    controller: ShopBundle\Controller\CartItemController::editAction
+    methods: PUT
+
+shop_cart_item_delete:
+    path: /cartItem/{id}/delete
+    controller: ShopBundle\Controller\CartItemController::deleteAction
+    methods: DELETE

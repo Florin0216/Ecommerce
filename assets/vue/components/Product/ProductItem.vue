@@ -7,6 +7,19 @@ const props = defineProps({
         required: true,
     }
 })
+
+const addToCart = (product) => {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const existingProduct = cart.find(i => i.id === product.id);
+    if (existingProduct) {
+        existingProduct.quantity += product.quantity;
+    } else {
+        cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 </script>
 
 <template>
@@ -49,7 +62,7 @@ const props = defineProps({
                     </div>
                 </div>
 
-                <button
+                <button @click="addToCart(product)"
                     class="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
                     <span>Add to Cart</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

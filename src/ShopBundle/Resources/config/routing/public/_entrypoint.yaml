@@ -5,3 +5,20 @@ public_shop_product_import:
 public_shop_category_import:
     resource: "@ShopBundle/Resources/config/routing/public/category.yaml"
     prefix: /
+
+public_shop_cart_import:
+    resource: "@ShopBundle/Resources/config/routing/public/cart.yaml"
+    prefix: /
+
+public_shop_cart_item_import:
+    resource: "@ShopBundle/Resources/config/routing/public/cart_item.yaml"
+    prefix: /
+
+public_shop_order_import:
+    resource: "@ShopBundle/Resources/config/routing/public/order.yaml"
+    prefix: /
+
+public_shop_order_item_import:
+    resource: "@ShopBundle/Resources/config/routing/public/order_item.yaml"
+    prefix: /
+

@@ -30,5 +30,26 @@ fos_js_routing:
         - admin_shop_category_edit
         - admin_shop_category_delete
 
-        #User
+        # User
         - public_user_user_show
+
+        # Cart
+        - shop_cart_show
+        - shop_cart_list
+        - shop_cart_new
+        - shop_cart_edit
+
+        # Cart Item
+        - shop_cart_item_list
+        - shop_cart_item_new
+        - shop_cart_item_edit
+        - shop_cart_item_delete
+
+        # Order
+        - shop_order_show
+        - shop_order_new
+        - shop_order_edit
+
+        # OrderItem
+        - shop_order_item_new
+        - shop_order_item_edit

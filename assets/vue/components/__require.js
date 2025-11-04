@@ -7,6 +7,8 @@ import Login from "./User/Login.vue";
 import CategoriesListAdmin from "./Category/admin/CategoriesListAdmin.vue";
 import ProductListing from "./Product/ProductListing.vue";
 import ProductShow from "./Product/ProductShow.vue";
+import CartShow from "./Cart/CartShow.vue";
+import OrderShow from "./Order/OrderShow.vue";
 
 app.component('navbar',Navbar);
 app.component('sidebar',Sidebar);
@@ -16,3 +18,5 @@ app.component('product-list-admin', ProductListAdmin);
 app.component('categories-list-admin',CategoriesListAdmin);
 app.component('product-listing', ProductListing);
 app.component('product-show', ProductShow);
+app.component('cart-show',CartShow);
+app.component('order-show',OrderShow);

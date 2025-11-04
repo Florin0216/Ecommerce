@@ -1,0 +1,9 @@
+shop_order_item_new:
+    path: /orderItem/new
+    controller: ShopBundle\Controller\OrderItemController::newAction
+    methods: POST
+
+shop_order_item_edit:
+    path: /orderItem/edit
+    controller: ShopBundle\Controller\OrderItemController::editAction
+    methods: PUT

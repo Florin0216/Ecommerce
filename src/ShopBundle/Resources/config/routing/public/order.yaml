@@ -1,0 +1,15 @@
+shop_order_show:
+    path: /checkout
+    controller: ShopBundle\Controller\OrderController::showAction
+    methods: GET
+
+
+shop_order_new:
+    path: /checkout/new
+    controller: ShopBundle\Controller\OrderController::newAction
+    methods: POST
+
+shop_order_edit:
+    path: /checkout/{id}/edit
+    controller: ShopBundle\Controller\OrderController::editAction
+    methods: PUT

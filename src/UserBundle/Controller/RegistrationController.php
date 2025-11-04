@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
 use UserBundle\Entity\User;
 use UserBundle\Form\Factory\RegistrationFormFactory;
 
@@ -17,7 +19,8 @@ class RegistrationController extends AbstractController
     public function __construct(
         protected EntityManagerInterface  $em,
         protected EntityService           $es,
-        protected RegistrationFormFactory $formFactory
+        protected RegistrationFormFactory $formFactory,
+        protected SerializerInterface     $serializer,
     )
     {
     }
@@ -45,7 +48,9 @@ class RegistrationController extends AbstractController
         }
 
         return new JsonResponse([
-            'data' => []
+            'data' => $this->serializer->normalize($user, null, [
+                AbstractNormalizer::GROUPS => User::NORMALIZER_GROUPS,
+            ])
         ]);
     }
 
