@@ -22,3 +22,23 @@ public_shop_order_item_import:
     resource: "@ShopBundle/Resources/config/routing/public/order_item.yaml"
     prefix: /
 
+public_shop_billing_import:
+    resource: "@ShopBundle/Resources/config/routing/public/billing.yaml"
+    prefix: /
+
+public_shop_shipping_import:
+    resource: "@ShopBundle/Resources/config/routing/public/shipping.yaml"
+    prefix: /
+
+public_shop_stripe_import:
+    resource: "@ShopBundle/Resources/config/routing/public/stripe.yaml"
+    prefix: /
+
+public_shop_payment_import:
+    resource: "@ShopBundle/Resources/config/routing/public/payment.yaml"
+    prefix: /
+
+public_shop_delivery_import:
+    resource: "@ShopBundle/Resources/config/routing/public/delivery.yaml"
+    prefix: /
+

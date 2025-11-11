@@ -23,7 +23,7 @@ onMounted(() => {
     UserService.list().then((response) => {
         user.value = response.data.data;
 
-        if (user.value && !cartStore.isInitialized) {
+        if (user.value && !cartStore.isInitialized && user.value.roles[0] !== 'ROLE_ADMIN') {
             CartService.list(user.value.id).then((cartResponse) => {
 
                 CartItemService.list(cartResponse.data.data.id).then((cartItemsResponse) => {
@@ -33,10 +33,8 @@ onMounted(() => {
                         quantity: item.quantity,
                     }));
 
-                    const allItems = [...serverItems];
-
                     const promises = cartStore.cart.map((localItem) => {
-                        const existing = allItems.find((i) => i.product.id === localItem.product.id);
+                        const existing = serverItems.find((i) => i.product.id === localItem.product.id);
 
                         if (existing) {
                             localItem.quantity += existing.quantity;
@@ -46,8 +44,6 @@ onMounted(() => {
                                 cart: cartResponse.data.data.id,
                             }))
                         } else {
-                            cartStore.cart.push(localItem);
-                            allItems.push(localItem);
                             return CartItemService.new(
                                 new CartItemCreateDto({
                                     quantity: localItem.quantity,
@@ -55,6 +51,16 @@ onMounted(() => {
                                     cart: cartResponse.data.data.id,
                                 })
                             )
+                        }
+                    });
+
+                    serverItems.forEach((serverItem) => {
+                        const existsLocally = cartStore.cart.find((localItem) => localItem.product.id === serverItem.product.id);
+                        if (!existsLocally) {
+                            cartStore.cart.push({
+                                product: serverItem.product,
+                                quantity: serverItem.quantity,
+                            });
                         }
                     });
 

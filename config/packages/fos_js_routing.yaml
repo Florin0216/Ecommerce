@@ -49,7 +49,32 @@ fos_js_routing:
         - shop_order_show
         - shop_order_new
         - shop_order_edit
+        - shop_order_delete
 
         # OrderItem
+        - shop_order_item_list
         - shop_order_item_new
         - shop_order_item_edit
+        - shop_order_item_delete
+
+        # Shipping
+        - shop_shipping_shipping_list
+        - shop_shipping_list
+        - shop_shipping_new
+        - shop_shipping_edit
+
+        # Billing
+        - shop_billing_list
+        - shop_billing_new
+        - shop_billing_edit
+
+        # Stripe
+        - shop_stripe_new
+
+        # Payment
+        - shop_payment_new
+        - shop_payment_edit
+        - shop_payment_delete
+
+        # Delivery
+        - shop_delivery_list

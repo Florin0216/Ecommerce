@@ -10,6 +10,15 @@ class OrderService{
                 data: order
             });
     }
+
+    delete(order, args = {}) {
+        args.id = order.id;
+
+        const requestUrl = FosJsRouting.generate('shop_order_delete', args);
+
+        return axios
+            .delete(requestUrl);
+    }
 }
 
 export default new OrderService();

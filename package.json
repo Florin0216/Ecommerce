@@ -28,6 +28,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@stripe/stripe-js": "^8.3.0",
         "axios": "^1.12.2",
         "bootstrap-icons": "^1.13.1",
         "flowbite": "^3.1.2",

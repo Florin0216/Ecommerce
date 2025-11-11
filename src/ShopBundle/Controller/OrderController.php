@@ -5,6 +5,7 @@ namespace ShopBundle\Controller;
 use AppBundle\Services\EntityService;
 use Doctrine\ORM\EntityManagerInterface;
 use ShopBundle\Entity\Order;
+use ShopBundle\Entity\OrderItem;
 use ShopBundle\Form\Factory\OrderFormFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,11 +28,47 @@ class OrderController extends AbstractController
 
     public function showAction(): Response
     {
-        if (!$this->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('user_security_login');
+        return $this->render('@Shop/Order/public/show.html.twig');
+    }
+
+    public function successAction($id): Response
+    {
+        $order = $this->entityManager->getRepository(Order::class)->findOneBy(['id' => $id]);
+        $orderItems = $this->entityManager->getRepository(OrderItem::class)->findBy(['order' => $order]);
+
+        return $this->render('@Shop/Order/public/success.html.twig', [
+            'jsData' => [
+                'order' => $this->serializer->normalize($order, null, [
+                    AbstractNormalizer::GROUPS => Order::NORMALIZER_GROUPS,
+                ]),
+                'orderItems' => $this->serializer->normalize($orderItems, null, [
+                    AbstractNormalizer::GROUPS => OrderItem::NORMALIZER_GROUPS,
+                ]),
+            ]
+        ]);
+    }
+
+    public function cancelAction($id): Response
+    {
+        $order = $this->entityManager->getRepository(Order::class)->findOneBy(['id' => $id]);
+
+        if ($order->getStatus() == 'pending') {
+            $order->setStatus('cancelled');
+            $orderItems = $this->entityManager->getRepository(OrderItem::class)->findBy(['order' => $order]);
+
+            foreach ($orderItems as $item) {
+                $product = $item->getProduct();
+
+                if ($product) {
+                    $product->setStock($product->getStock() + $item->getQuantity());
+                    $this->entityManager->persist($product);
+                }
+            }
+
+            $this->entityManager->flush();
         }
 
-        return $this->render('@Shop/Order/public/show.html.twig');
+        return $this->render('@Shop/Order/public/cancel.html.twig');
     }
 
     #[IsGranted('ROLE_USER')]
@@ -73,6 +110,17 @@ class OrderController extends AbstractController
             'data' => $this->serializer->normalize($order, null, [
                 AbstractNormalizer::GROUPS => Order::NORMALIZER_GROUPS,
             ])
+        ]);
+    }
+
+    public function deleteAction($id, Request $request): Response
+    {
+        $order = $this->entityService->findOrReject(Order::class, $id);
+
+        $this->entityService->delete($order);
+
+        return new JsonResponse([
+            'data' => []
         ]);
     }
 

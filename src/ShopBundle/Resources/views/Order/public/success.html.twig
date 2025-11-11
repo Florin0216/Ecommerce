@@ -1,0 +1,6 @@
+{% extends 'main/1cols.html.twig' %}
+
+{% block content %}
+    <order-success :order="{{ jsData['order']|json_encode }}"
+                   :order-items="{{ jsData['orderItems']|json_encode }}"></order-success>
+{% endblock %}

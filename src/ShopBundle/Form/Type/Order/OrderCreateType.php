@@ -13,15 +13,12 @@ class OrderCreateType extends AbstractType
     {
         $builder
             ->add('total')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('email')
-            ->add('address')
-            ->add('city')
-            ->add('country')
-            ->add('postalCode')
-            ->add('phoneNumber')
-            ->add('user');
+            ->add('status')
+            ->add('shipping')
+            ->add('billing')
+            ->add('delivery')
+            ->add('user')
+            ->add('payment');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

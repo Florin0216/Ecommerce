@@ -1,0 +1,15 @@
+
+shop_payment_new:
+    path: /payment/new
+    controller: ShopBundle\Controller\PaymentController::newAction
+    methods: POST
+
+shop_payment_edit:
+    path: /payment/{id}/edit
+    controller: ShopBundle\Controller\PaymentController::editAction
+    methods: PUT
+
+shop_payment_delete:
+    path: /payment/{id}/delete
+    controller: ShopBundle\Controller\PaymentController::deleteAction
+    methods: DELETE

@@ -9,6 +9,8 @@ import ProductListing from "./Product/ProductListing.vue";
 import ProductShow from "./Product/ProductShow.vue";
 import CartShow from "./Cart/CartShow.vue";
 import OrderShow from "./Order/OrderShow.vue";
+import OrderCancel from "./Order/OrderCancel.vue";
+import OrderSuccess from "./Order/OrderSuccess.vue";
 
 app.component('navbar',Navbar);
 app.component('sidebar',Sidebar);
@@ -20,3 +22,5 @@ app.component('product-listing', ProductListing);
 app.component('product-show', ProductShow);
 app.component('cart-show',CartShow);
 app.component('order-show',OrderShow);
+app.component('order-cancel',OrderCancel);
+app.component('order-success',OrderSuccess);

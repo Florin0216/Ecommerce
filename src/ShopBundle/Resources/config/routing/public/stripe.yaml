@@ -1,0 +1,10 @@
+
+shop_stripe_new:
+    path: /stripe/new
+    controller: ShopBundle\Controller\StripeController::newAction
+    methods: POST
+
+shop_stripe_handle_webhook:
+    path: /stripe/webhook
+    controller: ShopBundle\Controller\StripeController::handleWebhookAction
+    methods: POST

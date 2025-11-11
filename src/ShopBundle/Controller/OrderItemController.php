@@ -4,6 +4,7 @@ namespace ShopBundle\Controller;
 
 use AppBundle\Services\EntityService;
 use Doctrine\ORM\EntityManagerInterface;
+use ShopBundle\Entity\CartItem;
 use ShopBundle\Entity\OrderItem;
 use ShopBundle\Form\Factory\OrderItemFormFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,18 @@ class OrderItemController extends AbstractController
     )
     {
     }
+
+    public function listAction($id):Response
+    {
+        $orderItems = $this->entityManager->getRepository(OrderItem::class)->findBy(['order' => $id]);
+
+        return new JsonResponse([
+            'data' => $this->serializer->normalize($orderItems, null, [
+                AbstractNormalizer::GROUPS => OrderItem::NORMALIZER_GROUPS,
+            ])
+        ]);
+    }
+
 
     #[IsGranted('ROLE_USER')]
     public function newAction(Request $request): Response
@@ -68,6 +81,17 @@ class OrderItemController extends AbstractController
             'data' => $this->serializer->normalize($orderItem, null, [
                 AbstractNormalizer::GROUPS => OrderItem::NORMALIZER_GROUPS,
             ])
+        ]);
+    }
+
+    public function deleteAction($id, Request $request): Response
+    {
+        $orderItem = $this->entityService->findOrReject(OrderItem::class, $id);
+
+        $this->entityService->delete($orderItem);
+
+        return new JsonResponse([
+            'data' => []
         ]);
     }
 

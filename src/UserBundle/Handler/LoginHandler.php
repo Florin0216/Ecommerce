@@ -4,6 +4,7 @@ namespace UserBundle\Handler;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -11,7 +12,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 
 class LoginHandler implements AuthenticationSuccessHandlerInterface
 {
-    public function __construct(protected RouterInterface $router)
+    public function __construct(protected RouterInterface $router, protected RequestStack $requestStack)
     {
     }
 

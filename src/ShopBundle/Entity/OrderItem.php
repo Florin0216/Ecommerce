@@ -13,7 +13,7 @@ class OrderItem
 {
     const ENTITY_ALIAS = 'otm';
 
-    const NORMALIZER_GROUPS = ['otm.details'];
+    const NORMALIZER_GROUPS = ['otm.details','product.details','order.details'];
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,11 +26,11 @@ class OrderItem
     protected ?int $quantity = null;
 
     #[ORM\ManyToOne(targetEntity: Product::class)]
-    #[Groups(['otm.details'])]
+    #[Groups(['product.details'])]
     protected ?Product $product = null;
 
     #[ORM\ManyToOne(targetEntity: Order::class)]
-    #[Groups(['otm.details'])]
+    #[Groups(['order.details'])]
     protected ?Order $order = null;
 
     public function getId(): ?int

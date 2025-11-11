@@ -1,15 +1,29 @@
 shop_order_show:
-    path: /checkout
+    path: /order
     controller: ShopBundle\Controller\OrderController::showAction
     methods: GET
 
+shop_order_success:
+    path: /order/{id}/success
+    controller: ShopBundle\Controller\OrderController::successAction
+    methods: GET
+
+shop_order_cancel:
+    path: /order/{id}/cancel
+    controller: ShopBundle\Controller\OrderController::cancelAction
+    methods: GET
 
 shop_order_new:
-    path: /checkout/new
+    path: /order/new
     controller: ShopBundle\Controller\OrderController::newAction
     methods: POST
 
 shop_order_edit:
-    path: /checkout/{id}/edit
+    path: /order/{id}/edit
     controller: ShopBundle\Controller\OrderController::editAction
     methods: PUT
+
+shop_order_delete:
+    path: /order/{id}/delete
+    controller: ShopBundle\Controller\OrderController::deleteAction
+    methods: DELETE

@@ -5,16 +5,19 @@ namespace ShopBundle\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ShopBundle\Repository\OrderRepository;
+use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use UserBundle\Entity\User;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: 'shop__order')]
+#[ORM\HasLifecycleCallbacks]
 class Order
 {
     const ENTITY_ALIAS = 'order';
 
-    const NORMALIZER_GROUPS = ['order.details'];
+    const NORMALIZER_GROUPS = ['order.details', 'bil.details', 'shp.details', 'payment.details', 'delivery.details'];
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,41 +29,33 @@ class Order
     #[Groups(['order.details'])]
     protected ?float $total = null;
 
-    #[ORM\Column(type: Types::STRING, length: 64)]
+    #[ORM\Column(type: Types::STRING, length: 32)]
     #[Groups(['order.details'])]
-    protected ?string $firstName = null;
+    protected ?string $status = null;
 
-    #[ORM\Column(type: Types::STRING, length: 64)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[Context([DateTimeNormalizer::FORMAT_KEY => 'Y-m-d\TH:i'])]
     #[Groups(['order.details'])]
-    protected ?string $lastName = null;
-
-    #[ORM\Column(type: Types::STRING, length: 128)]
-    #[Groups(['order.details'])]
-    protected ?string $email = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['order.details'])]
-    protected ?string $address = null;
-
-    #[ORM\Column(type: Types::STRING, length: 64)]
-    #[Groups(['order.details'])]
-    protected ?string $city = null;
-
-    #[ORM\Column(type: Types::STRING, length: 64)]
-    #[Groups(['order.details'])]
-    protected ?string $country = null;
-
-    #[ORM\Column(type: Types::INTEGER)]
-    #[Groups(['order.details'])]
-    protected ?int $postalCode = null;
-
-    #[ORM\Column(type: Types::INTEGER)]
-    #[Groups(['order.details'])]
-    protected ?int $phoneNumber = null;
-
+    protected ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     protected ?User $user = null;
+
+    #[ORM\ManyToOne(targetEntity: Billing::class)]
+    #[Groups(['bil.details'])]
+    protected ?Billing $billing = null;
+
+    #[ORM\ManyToOne(targetEntity: Delivery::class)]
+    #[Groups(['delivery.details'])]
+    protected ?Delivery $delivery = null;
+
+    #[ORM\ManyToOne(targetEntity: Shipping::class)]
+    #[Groups(['shp.details'])]
+    protected ?Shipping $shipping = null;
+
+    #[ORM\ManyToOne(targetEntity: Payment::class)]
+    #[Groups(['payment.details'])]
+    protected ?Payment $payment = null;
 
     public function getId(): ?int
     {
@@ -78,92 +73,26 @@ class Order
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getStatus(): ?string
     {
-        return $this->firstName;
+        return $this->status;
     }
 
-    public function setFirstName(?string $firstName): Order
+    public function setStatus(?string $status): Order
     {
-        $this->firstName = $firstName;
+        $this->status = $status;
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->lastName;
+        return $this->createdAt;
     }
 
-    public function setLastName(?string $lastName): Order
+    #[ORM\PrePersist]
+    public function setCreatedAt(): void
     {
-        $this->lastName = $lastName;
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): Order
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): Order
-    {
-        $this->address = $address;
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): Order
-    {
-        $this->city = $city;
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?string $country): Order
-    {
-        $this->country = $country;
-        return $this;
-    }
-
-    public function getPostalCode(): ?int
-    {
-        return $this->postalCode;
-    }
-
-    public function setPostalCode(?int $postalCode): Order
-    {
-        $this->postalCode = $postalCode;
-        return $this;
-    }
-
-    public function getPhoneNumber(): ?int
-    {
-        return $this->phoneNumber;
-    }
-
-    public function setPhoneNumber(?int $phoneNumber): Order
-    {
-        $this->phoneNumber = $phoneNumber;
-        return $this;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getUser(): ?User
@@ -174,6 +103,50 @@ class Order
     public function setUser(?User $user): Order
     {
         $this->user = $user;
+        return $this;
+    }
+
+    public function getBilling(): ?Billing
+    {
+        return $this->billing;
+    }
+
+    public function setBilling(?Billing $billing): Order
+    {
+        $this->billing = $billing;
+        return $this;
+    }
+
+    public function getDelivery(): ?Delivery
+    {
+        return $this->delivery;
+    }
+
+    public function setDelivery(?Delivery $delivery): Order
+    {
+        $this->delivery = $delivery;
+        return $this;
+    }
+
+    public function getShipping(): ?Shipping
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping(?Shipping $shipping): Order
+    {
+        $this->shipping = $shipping;
+        return $this;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): Order
+    {
+        $this->payment = $payment;
         return $this;
     }
 

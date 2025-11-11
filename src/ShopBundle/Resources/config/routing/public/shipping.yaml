@@ -1,0 +1,20 @@
+
+shop_shipping_shipping_list:
+    path: /shipping/{id}
+    controller: ShopBundle\Controller\ShippingController::listShippingAction
+    methods: GET
+
+shop_shipping_list:
+    path: /user/{id}/shipments
+    controller: ShopBundle\Controller\ShippingController::listAction
+    methods: GET
+
+shop_shipping_new:
+    path: /shipping/new
+    controller: ShopBundle\Controller\ShippingController::newAction
+    methods: POST
+
+shop_shipping_edit:
+    path: /shipping/{id}/edit
+    controller: ShopBundle\Controller\ShippingController::editAction
+    methods: PUT
