@@ -2,6 +2,15 @@ import FosJsRouting from "../../js/fosJsRouting";
 import axios from "axios";
 
 class OrderService{
+
+    list(user,args = {}){
+        args.id = user.id;
+
+        const requestUrl = FosJsRouting.generate('shop_order_list', args);
+
+        return axios
+            .get(requestUrl);
+    }
     new(order, args = {}){
         const requestUrl = FosJsRouting.generate('shop_order_new', args);
 

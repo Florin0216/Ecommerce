@@ -1,8 +1,8 @@
 import FosJsRouting from "../../js/fosJsRouting";
 import axios from "axios";
 
-class CartService{
-    list(userId,args = {}){
+class CartService {
+    list(userId, args = {}) {
         args.id = userId;
 
         const requestUrl = FosJsRouting.generate('shop_cart_list', args);
@@ -10,7 +10,8 @@ class CartService{
         return axios
             .get(requestUrl);
     }
-    new(cart,args = {}){
+
+    new(cart, args = {}) {
         const requestUrl = FosJsRouting.generate('shop_cart_new', args);
 
         return axios
@@ -19,7 +20,7 @@ class CartService{
             });
     }
 
-    edit(cartId,cart,args = {}){
+    edit(cartId, cart, args = {}) {
         args.id = cartId;
 
         const requestUrl = FosJsRouting.generate('shop_cart_edit', args);

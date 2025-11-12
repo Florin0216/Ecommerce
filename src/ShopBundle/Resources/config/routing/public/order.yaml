@@ -3,6 +3,16 @@ shop_order_show:
     controller: ShopBundle\Controller\OrderController::showAction
     methods: GET
 
+shop_order_show_history:
+    path: /order/history
+    controller: ShopBundle\Controller\OrderController::showHistoryAction
+    methods: GET
+
+shop_order_list:
+    path: /user/{id}/orders
+    controller: ShopBundle\Controller\OrderController::listAction
+    methods: GET
+
 shop_order_success:
     path: /order/{id}/success
     controller: ShopBundle\Controller\OrderController::successAction

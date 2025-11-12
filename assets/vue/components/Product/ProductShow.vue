@@ -6,6 +6,10 @@ import CartService from "../../Services/CartService";
 import CartItemService from "../../Services/CartItemService";
 import CartItemCreateDto from "../../dto/CartItem/CartItemCreateDto";
 import CartItemEditDto from "../../dto/CartItem/CartItemEditDto";
+import {useWishlistStore} from "../../stores/useWishlistStore";
+import WishlistService from "../../Services/WishlistService";
+import WishlistItemService from "../../Services/WishlistItemService";
+import WishlistItemCreateDto from "../../dto/WishlistItem/WishlistItemCreateDto";
 
 const props = defineProps({
     product: {
@@ -16,6 +20,7 @@ const props = defineProps({
 
 const quantity = ref(0);
 const cartStore = useCartStore();
+const wishlistStore = useWishlistStore();
 const user = ref(null);
 
 const addToQuantity = () => {
@@ -68,9 +73,38 @@ const addToCart = (product) => {
                         quantity.value = 0;
                     });
             })
-    }
-    else {
+    } else {
         quantity.value = 0;
+    }
+}
+
+const addToWishlist = (product) => {
+    const existingProduct = wishlistStore.wishlist.find(i => i.product.id === product.id);
+    if (!existingProduct) {
+        wishlistStore.wishlist.push({
+            product: product,
+        });
+    }
+    localStorage.setItem('wishlist', JSON.stringify(wishlistStore.wishlist));
+
+    if (user.value) {
+        WishlistService
+            .list(user.value.id)
+            .then((wishlistResponse) => {
+                WishlistItemService.list(wishlistResponse.data.data.id)
+                    .then(wishlistItemsResponse => {
+                        const existingItem = wishlistItemsResponse.data.data.find(item => item.product.id === product.id);
+
+                        if (!existingItem) {
+                            WishlistService.new(
+                                new WishlistItemCreateDto({
+                                    product: product.id,
+                                    wishlist: wishlistResponse.data.data.id,
+                                })
+                            )
+                        }
+                    });
+            })
     }
 }
 
@@ -190,8 +224,8 @@ onMounted(() => {
                                 </svg>
                                 Add to Cart
                             </button>
-                            <button
-                                class="px-8 py-4 border-2 border-slate-900 rounded-xl font-semibold hover:border-red-500 hover:text-red-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            <button @click="addToWishlist(props.product)"
+                                    class="px-8 py-4 border-2 border-slate-900 rounded-xl font-semibold hover:border-red-500 hover:text-red-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

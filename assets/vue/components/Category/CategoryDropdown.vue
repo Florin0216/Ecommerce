@@ -22,25 +22,25 @@ onMounted(() => {
     </svg>
     </button>
 
-    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
-        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+        <ul class="py-2 text-sm text-gray-700 " aria-labelledby="dropdownDefaultButton">
             <template
                 v-for="category in categories"
                 :key="category.id">
                 <li>
-                    <a :href="FosJsRouting.generate('shop_product_list',{id: category.id})" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> {{ category.name }}</a>
+                    <a :href="FosJsRouting.generate('shop_product_list',{id: category.id})" class="block px-4 py-2 hover:bg-gray-100 "> {{ category.name }}</a>
                 </li>
             </template>
         </ul>
     </div>
 
     <div class="z-10 block lg:hidden bg-gray-800 font-medium text-lg divide-gray-100 rounded-lg">
-        <ul class="text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+        <ul class="text-white " aria-labelledby="dropdownDefaultButton">
             <template
                 v-for="category in categories"
                 :key="category.id">
                 <li>
-                    <a :href="FosJsRouting.generate('shop_product_list',{id: category.id})" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> {{ category.name }}</a>
+                    <a :href="FosJsRouting.generate('shop_product_list',{id: category.id})" class="block px-4 py-2 "> {{ category.name }}</a>
                 </li>
             </template>
         </ul>

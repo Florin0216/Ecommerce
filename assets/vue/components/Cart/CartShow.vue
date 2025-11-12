@@ -97,7 +97,7 @@ onMounted(() => {
     <div class="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-12 space-y-6">
 
-            <h1 class="text-3xl font-bold text-slate-900 mb-6">Summary</h1>
+            <h1 class="text-3xl font-bold text-slate-900 mb-6">My cart</h1>
 
             <div v-if="cartItems?.length" class="space-y-4">
                 <div v-for="(item, id) in cartItems" :key="id"

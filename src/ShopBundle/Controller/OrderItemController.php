@@ -37,7 +37,6 @@ class OrderItemController extends AbstractController
         ]);
     }
 
-
     #[IsGranted('ROLE_USER')]
     public function newAction(Request $request): Response
     {

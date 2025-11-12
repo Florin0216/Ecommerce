@@ -14,7 +14,7 @@ class Wishlist
 {
     const ENTITY_ALIAS = 'wsh';
 
-    const NORMALIZER_GROUPS = ['wishlist.details', 'user.details', 'product.details'];
+    const NORMALIZER_GROUPS = ['wishlist.details', 'user.details'];
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,10 +26,6 @@ class Wishlist
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', unique: true, nullable: false)]
     #[Groups('user.details')]
     protected ?User $user = null;
-
-    #[ORM\ManyToOne(targetEntity: Product::class)]
-    #[Groups('product.details')]
-    protected ?Product $product = null;
 
     public function getId(): ?int
     {
@@ -44,17 +40,6 @@ class Wishlist
     public function setUser(?User $user): Wishlist
     {
         $this->user = $user;
-        return $this;
-    }
-
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
-
-    public function setProduct(?Product $product): Wishlist
-    {
-        $this->product = $product;
         return $this;
     }
 }

@@ -31,6 +31,22 @@ class OrderController extends AbstractController
         return $this->render('@Shop/Order/public/show.html.twig');
     }
 
+    public function showHistoryAction(): Response
+    {
+        return $this->render('@Shop/Order/public/showHistory.html.twig');
+    }
+
+    public function listAction($id): Response
+    {
+        $orders = $this->entityManager->getRepository(Order::class)->findBy(['user' => $id]);
+
+        return new JsonResponse([
+            'data' => $this->serializer->normalize($orders, null, [
+                AbstractNormalizer::GROUPS => Order::NORMALIZER_GROUPS,
+            ])
+        ]);
+    }
+
     public function successAction($id): Response
     {
         $order = $this->entityManager->getRepository(Order::class)->findOneBy(['id' => $id]);

@@ -46,7 +46,9 @@ fos_js_routing:
         - shop_cart_item_delete
 
         # Order
+        - shop_order_list
         - shop_order_show
+        - shop_order_show_history
         - shop_order_new
         - shop_order_edit
         - shop_order_delete
@@ -78,3 +80,15 @@ fos_js_routing:
 
         # Delivery
         - shop_delivery_list
+
+        # Wishlist
+        - shop_wishlist_show
+        - shop_wishlist_list
+        - shop_wishlist_new
+        - shop_wishlist_edit
+
+        # WishlistItem
+        - shop_wishlist_item_list
+        - shop_wishlist_item_new
+        - shop_wishlist_item_edit
+        - shop_wishlist_item_delete

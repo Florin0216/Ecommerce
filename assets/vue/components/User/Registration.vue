@@ -7,6 +7,8 @@ import FosJsRouting from "../../../js/fosJsRouting";
 import CartService from "../../Services/CartService";
 import CartCreateDto from "../../dto/Cart/CartCreateDto";
 import ToastService from "../../Services/ToastService";
+import WishlistService from "../../Services/WishlistService";
+import WishlistCreateDto from "../../dto/Wishlist/WishlistCreateDto";
 
 const userData = ref({});
 
@@ -14,10 +16,15 @@ const handleSubmit = () => {
     RegistrationService
         .register(new RegisterDto(userData.value))
         .then((response) => {
-            return CartService.new(new CartCreateDto({
-                total: 0,
-                user: response.data?.data.id
-            }))
+            return Promise.all([
+                CartService.new(new CartCreateDto({
+                    total: 0,
+                    user: response.data.data.id
+                })),
+                WishlistService.new(new WishlistCreateDto({
+                    user: response.data.data.id,
+                }))
+            ]);
         })
         .then(() => {
             ToastService.show("Account created successfully!", "success");

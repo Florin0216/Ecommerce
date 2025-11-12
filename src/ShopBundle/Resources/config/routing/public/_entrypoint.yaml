@@ -42,3 +42,11 @@ public_shop_delivery_import:
     resource: "@ShopBundle/Resources/config/routing/public/delivery.yaml"
     prefix: /
 
+public_shop_wishlist_import:
+    resource: "@ShopBundle/Resources/config/routing/public/wishlist.yaml"
+    prefix: /
+
+public_shop_wishlist_item_import:
+    resource: "@ShopBundle/Resources/config/routing/public/wishlist_item.yaml"
+    prefix: /
+
