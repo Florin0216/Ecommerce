@@ -10,6 +10,7 @@ import {useWishlistStore} from "../../stores/useWishlistStore";
 import WishlistService from "../../Services/WishlistService";
 import WishlistItemService from "../../Services/WishlistItemService";
 import WishlistItemCreateDto from "../../dto/WishlistItem/WishlistItemCreateDto";
+import ReviewsList from "../Review/ReviewsList.vue";
 
 const props = defineProps({
     product: {
@@ -22,6 +23,7 @@ const quantity = ref(0);
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
 const user = ref(null);
+
 
 const addToQuantity = () => {
     if (quantity.value <= props.product?.stock) {
@@ -118,9 +120,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="bg-white overflow-hidden">
                 <div class="grid lg:grid-cols-2 gap-8 p-6 sm:p-8 lg:p-12">
                     <div class="space-y-6">
                         <div
@@ -182,14 +184,6 @@ onMounted(() => {
                                     {{ category.name }}
                                 </button>
                             </div>
-                            <p class="text-slate-600 leading-relaxed mb-4 font-medium">
-                                {{ product.summary }}
-                            </p>
-                            <div class="prose prose-slate max-w-none">
-                                <p class="text-slate-600 leading-relaxed text-sm">
-                                    {{ product.description }}
-                                </p>
-                            </div>
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-slate-900 mb-3">
@@ -237,7 +231,7 @@ onMounted(() => {
                             <div class="flex items-center justify-between">
                                 <span class="text-slate-600 font-medium">Total Price</span>
                                 <span class="text-2xl font-bold text-slate-900">
-                                    {{ product.price }}
+                                    ${{ product.price }}
                                 </span>
                             </div>
                         </div>
@@ -274,6 +268,25 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+        <div class="max-w-7xl mx-auto mt-12">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-slate-50 to-slate-100 px-8 py-6 border-b border-slate-200">
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Product Description
+                    </h2>
+                </div>
+                <div class="px-8 py-8">
+                    <p class="text-slate-600 leading-relaxed text-base">
+                        {{ product.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <reviews-list :product="props.product"></reviews-list>
     </div>
 </template>
 

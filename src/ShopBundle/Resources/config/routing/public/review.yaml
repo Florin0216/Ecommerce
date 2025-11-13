@@ -1,0 +1,19 @@
+shop_review_reviews_list:
+    path: /product/{id}/reviews
+    controller: ShopBundle\Controller\ReviewController::listReviewsAction
+    methods: GET
+
+shop_review_new:
+    path: /review/new
+    controller: ShopBundle\Controller\ReviewController::newAction
+    methods: POST
+
+shop_review_edit:
+    path: /review/{id}/edit
+    controller: ShopBundle\Controller\ReviewController::editAction
+    methods: PUT
+
+shop_review_delete:
+    path: /review/{id}/delete
+    controller: ShopBundle\Controller\ReviewController::deleteAction
+    methods: DELETE

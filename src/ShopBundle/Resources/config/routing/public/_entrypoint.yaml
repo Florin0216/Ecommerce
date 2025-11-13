@@ -50,3 +50,7 @@ public_shop_wishlist_item_import:
     resource: "@ShopBundle/Resources/config/routing/public/wishlist_item.yaml"
     prefix: /
 
+public_shop_review_import:
+    resource: "@ShopBundle/Resources/config/routing/public/review.yaml"
+    prefix: /
+

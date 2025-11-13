@@ -92,3 +92,9 @@ fos_js_routing:
         - shop_wishlist_item_new
         - shop_wishlist_item_edit
         - shop_wishlist_item_delete
+
+        # Review
+        - shop_review_reviews_list
+        - shop_review_new
+        - shop_review_edit
+        - shop_review_delete
