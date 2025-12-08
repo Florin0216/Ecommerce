@@ -1,0 +1,11 @@
+public_user_import:
+    resource: "@UserBundle/Resources/config/routing/public/_entrypoint.yaml"
+    prefix: /
+    defaults:
+        _format: 'html'
+
+admin_user_import:
+    resource: "@UserBundle/Resources/config/routing/admin/_entrypoint.yaml"
+    prefix: /admin
+    defaults:
+        _format: 'html'

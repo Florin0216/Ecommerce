@@ -1,0 +1,39 @@
+shop_order_list:
+    path: /orders
+    controller: ShopBundle\Controller\OrderController::listAction
+    methods: GET
+
+shop_order_history_list:
+    path: /orders/history
+    controller: ShopBundle\Controller\OrderController::historyListAction
+    methods: GET
+
+shop_order_user_orders_list:
+    path: /api/user/{id}/orders
+    controller: ShopBundle\Controller\OrderController::userOrdersListAction
+    methods: GET
+
+shop_order_success:
+    path: /order/{id}/success
+    controller: ShopBundle\Controller\OrderController::successAction
+    methods: GET
+
+shop_order_cancel:
+    path: /order/{id}/cancel
+    controller: ShopBundle\Controller\OrderController::cancelAction
+    methods: GET
+
+shop_order_new:
+    path: /api/order/new
+    controller: ShopBundle\Controller\OrderController::newAction
+    methods: POST
+
+shop_order_edit:
+    path: /api/order/{id}/edit
+    controller: ShopBundle\Controller\OrderController::editAction
+    methods: PUT
+
+shop_order_delete:
+    path: /api/order/{id}/delete
+    controller: ShopBundle\Controller\OrderController::deleteAction
+    methods: DELETE

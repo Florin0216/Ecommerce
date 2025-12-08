@@ -1,0 +1,5 @@
+{% extends 'main/1cols.html.twig' %}
+
+{% block content %}
+    <product-listing :products="{{ products|json_encode }}"></product-listing>
+{% endblock %}

@@ -1,0 +1,56 @@
+public_shop_product_import:
+    resource: "@ShopBundle/Resources/config/routing/public/product.yaml"
+    prefix: /
+
+public_shop_category_import:
+    resource: "@ShopBundle/Resources/config/routing/public/category.yaml"
+    prefix: /
+
+public_shop_cart_import:
+    resource: "@ShopBundle/Resources/config/routing/public/cart.yaml"
+    prefix: /
+
+public_shop_cart_item_import:
+    resource: "@ShopBundle/Resources/config/routing/public/cart_item.yaml"
+    prefix: /
+
+public_shop_order_import:
+    resource: "@ShopBundle/Resources/config/routing/public/order.yaml"
+    prefix: /
+
+public_shop_order_item_import:
+    resource: "@ShopBundle/Resources/config/routing/public/order_item.yaml"
+    prefix: /
+
+public_shop_billing_import:
+    resource: "@ShopBundle/Resources/config/routing/public/billing.yaml"
+    prefix: /
+
+public_shop_shipping_import:
+    resource: "@ShopBundle/Resources/config/routing/public/shipping.yaml"
+    prefix: /
+
+public_shop_stripe_import:
+    resource: "@ShopBundle/Resources/config/routing/public/stripe.yaml"
+    prefix: /
+
+public_shop_payment_import:
+    resource: "@ShopBundle/Resources/config/routing/public/payment.yaml"
+    prefix: /
+
+public_shop_delivery_import:
+    resource: "@ShopBundle/Resources/config/routing/public/delivery.yaml"
+    prefix: /
+
+public_shop_wishlist_import:
+    resource: "@ShopBundle/Resources/config/routing/public/wishlist.yaml"
+    prefix: /
+
+public_shop_wishlist_item_import:
+    resource: "@ShopBundle/Resources/config/routing/public/wishlist_item.yaml"
+    prefix: /
+
+public_shop_review_import:
+    resource: "@ShopBundle/Resources/config/routing/public/review.yaml"
+    prefix: /
+

@@ -1,0 +1,10 @@
+shop_category_categories_list:
+    path: /api/categories
+    controller: ShopBundle\Controller\CategoryController::categoriesListAction
+    methods: GET
+
+shop_category_list:
+    path: /categories
+    controller: ShopBundle\Controller\CategoryController::listAction
+    methods: GET
+

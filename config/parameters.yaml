@@ -1,1 +1,7 @@
 parameters:
+    admin_user_username: '%env(resolve:ROOT_USER_USERNAME)%'
+    admin_user_password: '%env(resolve:ROOT_USER_PASSWORD)%'
+    admin_user_email: '%env(resolve:ROOT_USER_EMAIL)%'
+
+    stripe_api_key: '%env(resolve:STRIPE_SECRET_KEY)%'
+    webhook_secret: '%env(resolve:WEBHOOK_SECRET)%'

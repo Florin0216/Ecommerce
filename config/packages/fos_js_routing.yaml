@@ -1,3 +1,102 @@
 fos_js_routing:
     routes_to_expose:
+        # Homepage
         - public_app_homepage
+        - admin_app_homepage
+
+        # Registration
+        - user_registration_show
+        - user_registration_new
+
+        # Security
+        - user_security_login
+        - user_security_logout
+
+        # User
+        - public_user_user_show
+
+        # Product
+        - shop_product_products_list
+        - shop_product_category_products_list
+        - shop_product_product_show
+        - admin_shop_product_list
+        - admin_shop_product_new
+        - admin_shop_product_edit
+        - admin_shop_product_delete
+
+        # Category
+        - shop_category_categories_list
+        - shop_category_list
+        - admin_shop_category_list
+        - admin_shop_category_new
+        - admin_shop_category_edit
+        - admin_shop_category_delete
+
+        # Cart
+        - shop_cart_show
+        - shop_cart_user_cart_show
+        - shop_cart_new
+        - shop_cart_edit
+        - shop_cart_delete
+
+        # Cart Item
+        - shop_cart_item_cart_cart_items_list
+        - shop_cart_item_new
+        - shop_cart_item_edit
+        - shop_cart_item_delete
+
+        # Order
+        - shop_order_list
+        - shop_order_history_list
+        - shop_order_user_orders_list
+        - shop_order_new
+        - shop_order_edit
+        - shop_order_delete
+        - admin_shop_order_list
+        - admin_shop_order_orders_list
+
+        # OrderItem
+        - shop_order_item_order_order_items_list
+        - shop_order_item_new
+        - shop_order_item_edit
+        - shop_order_item_delete
+
+        # Shipping
+        - shop_shipping_shipping_show
+        - shop_shipping_user_shipments_list
+        - shop_shipping_new
+        - shop_shipping_edit
+
+        # Billing
+        - shop_billing_user_billings_list
+        - shop_billing_new
+        - shop_billing_edit
+
+        # Stripe
+        - shop_stripe_new
+
+        # Payment
+        - shop_payment_new
+        - shop_payment_edit
+        - shop_payment_delete
+
+        # Delivery
+        - shop_delivery_deliveries_list
+
+        # Wishlist
+        - shop_wishlist_show
+        - shop_wishlist_user_wishlist_show
+        - shop_wishlist_new
+        - shop_wishlist_edit
+
+        # WishlistItem
+        - shop_wishlist_item_wishlist_wishlist_items_list
+        - shop_wishlist_item_new
+        - shop_wishlist_item_edit
+        - shop_wishlist_item_delete
+
+        # Review
+        - shop_review_product_reviews_list
+        - shop_review_new
+        - shop_review_edit
+        - shop_review_delete

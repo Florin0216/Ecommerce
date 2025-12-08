@@ -1,0 +1,26 @@
+services:
+    ShopBundle\Controller\:
+        resource: "%kernel.project_dir%/src/ShopBundle/Controller/*"
+        autowire: true
+        autoconfigure: true
+
+    ShopBundle\Entity\:
+        resource: "%kernel.project_dir%/src/ShopBundle/Entity/*"
+        autowire: true
+        autoconfigure: true
+
+    ShopBundle\Repository\:
+        resource: "%kernel.project_dir%/src/ShopBundle/Repository/*"
+        autowire: true
+        autoconfigure: true
+
+    ShopBundle\Services\:
+        resource: "%kernel.project_dir%/src/ShopBundle/Services/*"
+        autowire: true
+        autoconfigure: true
+
+    ShopBundle\Form\:
+        resource: "%kernel.project_dir%/src/ShopBundle/Form/*"
+        autowire: true
+        autoconfigure: true
+

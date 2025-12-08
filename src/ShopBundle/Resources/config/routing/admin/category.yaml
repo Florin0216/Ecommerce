@@ -1,0 +1,19 @@
+admin_shop_category_list:
+    path: /categories
+    controller: ShopBundle\Controller\CategoryController::listAdminAction
+    methods: GET
+
+admin_shop_category_new:
+    path: /api/categories/new
+    controller: ShopBundle\Controller\CategoryController::newAdminAction
+    methods: POST
+
+admin_shop_category_edit:
+    path: /api/categories/{id}/edit
+    controller: ShopBundle\Controller\CategoryController::editAdminAction
+    methods: PUT
+
+admin_shop_category_delete:
+    path: /api/categories/{id}/delete
+    controller: ShopBundle\Controller\CategoryController::deleteAdminAction
+    methods: DELETE

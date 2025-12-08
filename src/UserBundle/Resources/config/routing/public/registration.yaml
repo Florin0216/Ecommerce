@@ -1,0 +1,9 @@
+user_registration_show:
+    path: /register
+    controller: UserBundle\Controller\RegistrationController::showAction
+    methods: GET
+
+user_registration_new:
+    path: /api/register/new
+    controller: UserBundle\Controller\RegistrationController::newAction
+    methods: POST

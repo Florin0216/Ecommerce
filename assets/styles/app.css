@@ -1,2 +1,8 @@
 @import "tailwindcss";
+@import "flowbite/src/themes/default.css";
+
 @source not "../../public";
+@source "../node_modules/flowbite";
+
+@plugin "flowbite/plugin";
+

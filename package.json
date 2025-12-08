@@ -9,7 +9,11 @@
         "postcss": "^8.5.6",
         "postcss-loader": "^8.2.0",
         "regenerator-runtime": "^0.13.9",
+        "sass": "^1.93.2",
+        "sass-loader": "^16.0.1",
         "tailwindcss": "^4.1.15",
+        "ts-loader": "^9.0.0",
+        "typescript": "^5.9.3",
         "vue-loader": "^17.0.0",
         "webpack": "^5.74.0",
         "webpack-cli": "^5.1.0",
@@ -24,6 +28,11 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@stripe/stripe-js": "^8.3.0",
+        "axios": "^1.12.2",
+        "bootstrap-icons": "^1.13.1",
+        "flowbite": "^3.1.2",
+        "pinia": "^3.0.3",
         "vue": "^3.5.22"
     }
 }

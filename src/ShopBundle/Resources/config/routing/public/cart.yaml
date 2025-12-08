@@ -1,0 +1,24 @@
+shop_cart_show:
+    path: /cart
+    controller: ShopBundle\Controller\CartController::showAction
+    methods: GET
+
+shop_cart_user_cart_show:
+    path: /api/user/{id}/cart
+    controller: ShopBundle\Controller\CartController::userCartShowAction
+    methods: GET
+
+shop_cart_new:
+    path: /api/cart/new
+    controller: ShopBundle\Controller\CartController::newAction
+    methods: POST
+
+shop_cart_edit:
+    path: /api/cart/{id}/edit
+    controller: ShopBundle\Controller\CartController::editAction
+    methods: PUT
+
+shop_cart_delete:
+    path: /api/cart/{id}/delete
+    controller: ShopBundle\Controller\CartController::deleteAction
+    methods: DELETE
