@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import UserService from "../../Services/UserService";
 import ShippingList from "../Shipping/ShippingList.vue";
 import BillingList from "../Billing/BillingList.vue";
@@ -14,6 +14,7 @@ import CartItemService from "../../Services/CartItemService";
 import CartService from "../../Services/CartService";
 import OrderSummary from "./OrderSummary.vue";
 import DeliveryService from "../../Services/DeliveryService";
+import {useCartStore} from "../../stores/useCartStore";
 
 const cartItems = ref([]);
 const order = ref({});
@@ -21,6 +22,8 @@ const step = ref(2);
 const user = ref();
 const paymentMethod = ref();
 const deliveryOptions = ref({});
+const cartStore = useCartStore();
+const isLoading = ref(false);
 const nextStep = () => {
     if (step.value < 3) step.value++;
 };
@@ -30,64 +33,63 @@ const prevStep = () => {
 };
 
 const onConfirm = () => {
-    PaymentService.new(new PaymentCreateDto({method: paymentMethod.value}))
-        .then((paymentResponse) => {
-            return OrderService.new(
-                new OrderCreateDto({
-                    ...order.value,
-                    user: user.value.id,
-                    payment: paymentResponse.data.data.id,
-                    status: 'pending'
-                })
-            );
+    isLoading.value = true;
+
+    CartService.list(user.value.id)
+        .then(cartResponse => CartItemService.list(cartResponse.data.data.id))
+        .then(cartItemsResponse => {
+            cartItems.value = cartItemsResponse.data.data;
+
+            return PaymentService.new(new PaymentCreateDto({method: paymentMethod.value}));
         })
-        .then((orderResponse) => {
-            const orderId = orderResponse.data.data.id;
-
-            const itemPromises = cartItems.value.map((item) =>
-                OrderItemService.new(
-                    new OrderItemCreateDto({
-                        quantity: item.quantity,
-                        product: item.product.id,
-                        order: orderId
-                    })
-                )
+        .then(paymentResponse => {
+            return OrderService.new(new OrderCreateDto({
+                ...order.value,
+                user: user.value.id,
+                payment: paymentResponse.data.data.id,
+                status: 'pending'
+            }));
+        })
+        .then(orderResponse => {
+            const itemPromises = cartItems.value.map(item =>
+                OrderItemService.new(new OrderItemCreateDto({
+                    quantity: item.quantity,
+                    product: item.product.id,
+                    order: orderResponse.data.data.id
+                }))
             );
-
-            return Promise.all(itemPromises).then((orderItemsResponse) => {
-                const deletePromises = cartItems.value.map((item) => {
-                    return CartItemService.delete(item);
-                });
-
+            return Promise.all(itemPromises);
+        })
+        .then(orderItemsResponses => {
+            const deletePromises = cartItems.value.map(item => CartItemService.delete(item));
+            return Promise.all(deletePromises).then(() => {
                 localStorage.removeItem('cart');
-
-                return Promise.all(deletePromises).then(() => {
-                    const orderItemsData = orderItemsResponse.map(response => response.data.data);
-                    return {
-                        orderItems: orderItemsData,
-                    };
-                });
+                return orderItemsResponses.map(res => res.data.data);
             });
         })
-        .then((response) => {
-            if (paymentMethod.value === "card") {
+        .then(orderItems => {
+            if (paymentMethod.value === "card" && orderItems.length > 0) {
                 return StripeService.new({
-                    orderItems: response.orderItems,
+                    orderItems: orderItems,
                     delivery: selectedDeliveryOption.value
-                }).then((stripeResponse) => {
+                }).then(stripeResponse => {
                     window.location.href = stripeResponse.data.url;
                 });
             }
         })
+        .finally(() => {
+            isLoading.value = false;
+        });
 };
+
 
 const selectedDeliveryOption = computed(() => {
     return deliveryOptions.value.find(d => d.id === order.value.delivery);
 });
 
-onMounted(() => {
+watch(cartStore.cart, () => {
     UserService
-        .list()
+        .show()
         .then((response) => {
             user.value = response.data.data;
 
@@ -97,6 +99,19 @@ onMounted(() => {
     })
         .then((cartItemsResponse) => {
             cartItems.value = cartItemsResponse.data.data;
+
+            return DeliveryService.list();
+        })
+        .then((deliveryResponse) => {
+            deliveryOptions.value = deliveryResponse.data.data;
+        })
+})
+
+onMounted(() => {
+    UserService
+        .show()
+        .then((response) => {
+            user.value = response.data.data;
 
             return DeliveryService.list();
         })
@@ -235,7 +250,7 @@ onMounted(() => {
                                         class="bg-gradient-to-br from-slate-50 to-slate-100 p-4 md:p-6 lg:p-8 w-full">
                                         <div v-for="delivery in deliveryOptions"
                                              :key="delivery.id"
-                                            class="bg-white shadow-sm divide-y divide-slate-100 max-w-5xl mx-auto">
+                                             class="bg-white shadow-sm divide-y divide-slate-100 max-w-5xl mx-auto">
                                             <div class="flex items-center gap-4 px-6 py-4">
                                                 <input
                                                     type="radio"
@@ -257,19 +272,20 @@ onMounted(() => {
                             </div>
                         </div>
                         <div v-if="step === 3">
-                            <order-summary :cart-items="cartItems" :order="order" :delivery-option="selectedDeliveryOption"></order-summary>
+                            <order-summary :cart-items="cartItems" :order="order"
+                                           :delivery-option="selectedDeliveryOption"></order-summary>
                         </div>
                     </div>
 
-<!--                    <div class="mt-8 pt-6 border-t border-gray-200">
-                        <div class="flex items-center justify-between text-lg font-semibold">
-                            <span class="text-gray-700">Total:</span>
-                            <span class="text-2xl text-blue-600">${{ cartStore.totalPrice?.toFixed(2) }}</span>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1 text-right">
-                            {{ cartStore.cart.length }} item(s) in cart
-                        </p>
-                    </div>-->
+                    <!--                    <div class="mt-8 pt-6 border-t border-gray-200">
+                                            <div class="flex items-center justify-between text-lg font-semibold">
+                                                <span class="text-gray-700">Total:</span>
+                                                <span class="text-2xl text-blue-600">${{ cartStore.totalPrice?.toFixed(2) }}</span>
+                                            </div>
+                                            <p class="text-sm text-gray-500 mt-1 text-right">
+                                                {{ cartStore.cart.length }} item(s) in cart
+                                            </p>
+                                        </div>-->
                 </div>
                 <div class="bg-gray-50 px-6 py-4 sm:px-8 sm:py-5 flex flex-col sm:flex-row gap-3 sm:justify-between">
                     <button

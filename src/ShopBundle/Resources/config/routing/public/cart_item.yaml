@@ -1,20 +1,20 @@
 
-shop_cart_item_list:
-    path: /cart/{id}/cartItems
-    controller: ShopBundle\Controller\CartItemController::listAction
+shop_cart_item_cart_cart_items_list:
+    path: /api/cart/{id}/cartItems
+    controller: ShopBundle\Controller\CartItemController::cartCartItemsListAction
     methods: GET
 
 shop_cart_item_new:
-    path: /cartItem/new
+    path: /api/cartItem/new
     controller: ShopBundle\Controller\CartItemController::newAction
     methods: POST
 
 shop_cart_item_edit:
-    path: /cartItem/{id}/edit
+    path: /api/cartItem/{id}/edit
     controller: ShopBundle\Controller\CartItemController::editAction
     methods: PUT
 
 shop_cart_item_delete:
-    path: /cartItem/{id}/delete
+    path: /api/cartItem/{id}/delete
     controller: ShopBundle\Controller\CartItemController::deleteAction
     methods: DELETE

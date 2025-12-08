@@ -1,20 +1,20 @@
 
-shop_shipping_shipping_list:
-    path: /shipping/{id}
-    controller: ShopBundle\Controller\ShippingController::listShippingAction
+shop_shipping_shipping_show:
+    path: /api/shipping/{id}
+    controller: ShopBundle\Controller\ShippingController::shippingShowAction
     methods: GET
 
-shop_shipping_list:
-    path: /user/{id}/shipments
-    controller: ShopBundle\Controller\ShippingController::listAction
+shop_shipping_user_shipments_list:
+    path: /api/user/{id}/shipments
+    controller: ShopBundle\Controller\ShippingController::userShipmentsListAction
     methods: GET
 
 shop_shipping_new:
-    path: /shipping/new
+    path: /api/shipping/new
     controller: ShopBundle\Controller\ShippingController::newAction
     methods: POST
 
 shop_shipping_edit:
-    path: /shipping/{id}/edit
+    path: /api/shipping/{id}/edit
     controller: ShopBundle\Controller\ShippingController::editAction
     methods: PUT

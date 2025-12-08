@@ -21,7 +21,7 @@ class DeliveryController extends AbstractController
     {
     }
 
-    public function listAction(): Response
+    public function deliveriesListAction(): Response
     {
         $deliveryOptions = $this->entityManager->getRepository(Delivery::class)->findAll();
 

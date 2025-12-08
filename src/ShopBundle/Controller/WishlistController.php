@@ -29,7 +29,7 @@ class WishlistController extends AbstractController
         return $this->render('@Shop/Wishlist/public/show.html.twig');
     }
 
-    public function listAction($id): Response
+    public function userWishlistShowAction($id): Response
     {
         $wishlist = $this->entityManager->getRepository(Wishlist::class)->findOneBy(['user' => $id]);
 

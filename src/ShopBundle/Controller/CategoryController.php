@@ -42,6 +42,7 @@ class CategoryController extends AbstractController
         return $this->render('@Shop/Category/public/list.html.twig');
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     public function listAdminAction(): Response
     {
         return $this->render('@Shop/Category/admin/list.html.twig');

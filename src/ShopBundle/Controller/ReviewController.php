@@ -24,7 +24,7 @@ class ReviewController extends AbstractController
     {
     }
 
-    public function listReviewsAction($id): Response
+    public function productReviewsListAction($id): Response
     {
         $reviews = $this->entityManager->getRepository(Review::class)->findBy(['product' => $id]);
 

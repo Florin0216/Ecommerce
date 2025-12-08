@@ -26,17 +26,35 @@ class OrderController extends AbstractController
     {
     }
 
-    public function showAction(): Response
+    public function listAction(): Response
     {
-        return $this->render('@Shop/Order/public/show.html.twig');
+        return $this->render('@Shop/Order/public/list.html.twig');
     }
 
-    public function showHistoryAction(): Response
+    public function historyListAction(): Response
     {
-        return $this->render('@Shop/Order/public/showHistory.html.twig');
+        return $this->render('@Shop/Order/public/listHistory.html.twig');
     }
 
-    public function listAction($id): Response
+    #[IsGranted('ROLE_ADMIN')]
+    public function listAdminAction(): Response
+    {
+        return $this->render('@Shop/Order/admin/list.html.twig');
+    }
+
+    #[IsGranted('ROLE_ADMIN')]
+    public function ordersListAdminAction(): Response
+    {
+        $orders = $this->entityManager->getRepository(Order::class)->findAll();
+
+        return new JsonResponse([
+            'data' => $this->serializer->normalize($orders, null, [
+                AbstractNormalizer::GROUPS => Order::NORMALIZER_GROUPS,
+            ])
+        ]);
+    }
+
+    public function userOrdersListAction($id): Response
     {
         $orders = $this->entityManager->getRepository(Order::class)->findBy(['user' => $id]);
 

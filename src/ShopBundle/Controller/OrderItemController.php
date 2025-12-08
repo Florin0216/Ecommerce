@@ -26,7 +26,7 @@ class OrderItemController extends AbstractController
     {
     }
 
-    public function listAction($id):Response
+    public function orderOrderItemsListAction($id):Response
     {
         $orderItems = $this->entityManager->getRepository(OrderItem::class)->findBy(['order' => $id]);
 

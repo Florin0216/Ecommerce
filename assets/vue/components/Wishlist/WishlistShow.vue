@@ -86,7 +86,7 @@ const removeFromWishlist = (product) => {
 onMounted(() => {
     getWishlistItems();
     UserService
-        .list()
+        .show()
         .then((response) => {
             user.value = response.data.data;
         })

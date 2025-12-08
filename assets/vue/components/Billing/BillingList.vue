@@ -36,7 +36,7 @@ const openBillingModal = (billing = null, isEditing = false) => {
 
 watch(asShipping, (newVal) => {
     if (newVal === true && props.order.shipping) {
-        ShippingService.listShipping(props.order.shipping)
+        ShippingService.show(props.order.shipping)
             .then((response) => {
                 const shippingData = response.data.data;
 

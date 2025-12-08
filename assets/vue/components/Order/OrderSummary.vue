@@ -45,7 +45,7 @@ watch(total, () => {
 
             <div class="space-y-4">
                 <div
-                    v-for="(item, index) in cartItems"
+                    v-for="(item, index) in cartStore.cart"
                     :key="index"
                     class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
                 >

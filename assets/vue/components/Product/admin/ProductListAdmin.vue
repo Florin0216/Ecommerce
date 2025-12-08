@@ -9,7 +9,7 @@ import ToastService from "../../../Services/ToastService";
 const products = ref([]);
 
 const getProducts = () => {
-    ProductService.productsList().then((response) => {
+    ProductService.listAdmin().then((response) => {
         products.value = response.data.data;
     });
 };
@@ -85,7 +85,7 @@ onMounted(() => {
                 </div>
             </div>
 
-            <div v-if="products.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div v-if="products.length" class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div
                     v-for="product in products"
                     :key="product.id"

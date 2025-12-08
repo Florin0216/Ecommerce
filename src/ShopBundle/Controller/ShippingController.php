@@ -24,18 +24,18 @@ class ShippingController extends AbstractController
     {
     }
 
-    public function listShippingAction($id, Request $request): Response
+    public function shippingShowAction($id, Request $request): Response
     {
-        $shipments = $this->entityManager->getRepository(Shipping::class)->findOneBy(['id' => $id]);
+        $shipping = $this->entityManager->getRepository(Shipping::class)->findOneBy(['id' => $id]);
 
         return new JsonResponse([
-            'data' => $this->serializer->normalize($shipments, null, [
+            'data' => $this->serializer->normalize($shipping, null, [
                 AbstractNormalizer::GROUPS => Shipping::NORMALIZER_GROUPS,
             ])
         ]);
     }
 
-    public function listAction($id, Request $request): Response
+    public function userShipmentsListAction($id, Request $request): Response
     {
         $shipments = $this->entityManager->getRepository(Shipping::class)->findBy(['user' => $id]);
 

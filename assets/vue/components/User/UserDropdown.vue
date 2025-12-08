@@ -43,11 +43,14 @@ const handleLogout = () => {
             <div class="truncate">{{ props.user.email }}</div>
         </div>
         <ul v-if="user" class="py-2 text-sm text-gray-700" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-            <li>
+            <li v-if="props.user.roles[0] === 'ROLE_ADMIN'">
+                <a :href="FosJsRouting.generate('admin_app_homepage')" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+            </li>
+            <li v-if="props.user.roles[0] !== 'ROLE_ADMIN'">
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100">Details</a>
             </li>
-            <li>
-                <a :href="FosJsRouting.generate('shop_order_show_history')" class="block px-4 py-2 hover:bg-gray-100">Orders</a>
+            <li v-if="props.user.roles[0] !== 'ROLE_ADMIN'">
+                <a :href="FosJsRouting.generate('shop_order_history_list')" class="block px-4 py-2 hover:bg-gray-100">Orders</a>
             </li>
             <li>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
@@ -55,7 +58,7 @@ const handleLogout = () => {
         </ul>
         <ul v-else class="py-2 text-sm text-gray-700" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
             <li>
-                <a :href="FosJsRouting.generate('user_registration_register')" class="block px-4 py-2 hover:bg-gray-100">Register</a>
+                <a :href="FosJsRouting.generate('user_registration_show')" class="block px-4 py-2 hover:bg-gray-100">Register</a>
             </li>
             <li>
                 <a :href="FosJsRouting.generate('user_security_login')" class="block px-4 py-2 hover:bg-gray-100">Login</a>

@@ -1,6 +1,6 @@
 
 shop_stripe_new:
-    path: /stripe/new
+    path: /api/stripe/new
     controller: ShopBundle\Controller\StripeController::newAction
     methods: POST
 

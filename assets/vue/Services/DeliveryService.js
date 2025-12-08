@@ -3,7 +3,7 @@ import axios from "axios";
 
 class DeliveryService{
     list(args = {}){
-        const requestUrl = FosJsRouting.generate('shop_delivery_list', args);
+        const requestUrl = FosJsRouting.generate('shop_delivery_deliveries_list', args);
 
         return axios
             .get(requestUrl)

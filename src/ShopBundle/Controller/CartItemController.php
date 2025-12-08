@@ -18,13 +18,13 @@ class CartItemController extends AbstractController
     public function __construct(
         protected EntityService          $entityService,
         protected EntityManagerInterface $entityManager,
-        protected CartItemFormFactory     $formFactory,
+        protected CartItemFormFactory    $formFactory,
         protected SerializerInterface    $serializer,
     )
     {
     }
 
-    public function listAction($id):Response
+    public function cartCartItemsListAction($id): Response
     {
         $cartItems = $this->entityManager->getRepository(CartItem::class)->findBy(['cart' => $id]);
 

@@ -2,10 +2,10 @@ import FosJsRouting from "../../js/fosJsRouting";
 import axios from "axios";
 
 class ShippingService{
-    listShipping(shippingId, args = {}) {
+    show(shippingId, args = {}) {
         args.id = shippingId;
 
-        const requestUrl = FosJsRouting.generate('shop_shipping_shipping_list', args);
+        const requestUrl = FosJsRouting.generate('shop_shipping_shipping_show', args);
 
         return axios
             .get(requestUrl)
@@ -14,7 +14,7 @@ class ShippingService{
     list(user, args = {}) {
         args.id = user.id;
 
-        const requestUrl = FosJsRouting.generate('shop_shipping_list', args);
+        const requestUrl = FosJsRouting.generate('shop_shipping_user_shipments_list', args);
 
         return axios
             .get(requestUrl)

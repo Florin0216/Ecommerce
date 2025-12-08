@@ -112,7 +112,7 @@ const addToWishlist = (product) => {
 
 onMounted(() => {
     UserService
-        .list()
+        .show()
         .then((response) => {
             user.value = response.data.data;
         })
@@ -202,9 +202,6 @@ onMounted(() => {
                                     >
                                         +
                                     </button>
-                                </div>
-                                <div class="text-sm text-slate-500">
-                                    <span class="font-medium text-slate-700">{{ product.stock }}</span> available
                                 </div>
                             </div>
                         </div>

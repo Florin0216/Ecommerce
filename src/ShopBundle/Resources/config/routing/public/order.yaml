@@ -1,16 +1,16 @@
-shop_order_show:
-    path: /order
-    controller: ShopBundle\Controller\OrderController::showAction
-    methods: GET
-
-shop_order_show_history:
-    path: /order/history
-    controller: ShopBundle\Controller\OrderController::showHistoryAction
-    methods: GET
-
 shop_order_list:
-    path: /user/{id}/orders
+    path: /orders
     controller: ShopBundle\Controller\OrderController::listAction
+    methods: GET
+
+shop_order_history_list:
+    path: /orders/history
+    controller: ShopBundle\Controller\OrderController::historyListAction
+    methods: GET
+
+shop_order_user_orders_list:
+    path: /api/user/{id}/orders
+    controller: ShopBundle\Controller\OrderController::userOrdersListAction
     methods: GET
 
 shop_order_success:
@@ -24,16 +24,16 @@ shop_order_cancel:
     methods: GET
 
 shop_order_new:
-    path: /order/new
+    path: /api/order/new
     controller: ShopBundle\Controller\OrderController::newAction
     methods: POST
 
 shop_order_edit:
-    path: /order/{id}/edit
+    path: /api/order/{id}/edit
     controller: ShopBundle\Controller\OrderController::editAction
     methods: PUT
 
 shop_order_delete:
-    path: /order/{id}/delete
+    path: /api/order/{id}/delete
     controller: ShopBundle\Controller\OrderController::deleteAction
     methods: DELETE

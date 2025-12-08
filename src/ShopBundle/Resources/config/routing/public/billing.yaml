@@ -1,15 +1,15 @@
 
-shop_billing_list:
-    path: /user/{id}/billings
-    controller: ShopBundle\Controller\BillingController::listAction
+shop_billing_user_billings_list:
+    path: /api/user/{id}/billings
+    controller: ShopBundle\Controller\BillingController::userBillingsListAction
     methods: GET
 
 shop_billing_new:
-    path: /billing/new
+    path: /api/billing/new
     controller: ShopBundle\Controller\BillingController::newAction
     methods: POST
 
 shop_billing_edit:
-    path: /billing/{id}/edit
+    path: /api/billing/{id}/edit
     controller: ShopBundle\Controller\BillingController::editAction
     methods: PUT

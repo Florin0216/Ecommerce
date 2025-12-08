@@ -5,7 +5,7 @@ class ReviewService{
     list(productId, args = {}) {
         args.id = productId;
 
-        const requestUrl = FosJsRouting.generate('shop_review_reviews_list', args);
+        const requestUrl = FosJsRouting.generate('shop_review_product_reviews_list', args);
 
         return axios
             .get(requestUrl);

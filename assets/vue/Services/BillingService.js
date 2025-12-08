@@ -5,7 +5,7 @@ class BillingService{
     list(user, args = {}) {
         args.id = user.id;
 
-        const requestUrl = FosJsRouting.generate('shop_billing_list', args);
+        const requestUrl = FosJsRouting.generate('shop_billing_user_billings_list', args);
 
         return axios
             .get(requestUrl)

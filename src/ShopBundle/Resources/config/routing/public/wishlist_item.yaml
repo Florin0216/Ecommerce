@@ -1,20 +1,20 @@
 
-shop_wishlist_item_list:
-    path: /wishlist/{id}/wishlistItems
-    controller: ShopBundle\Controller\WishlistItemController::listAction
+shop_wishlist_item_wishlist_wishlist_items_list:
+    path: /api/wishlist/{id}/wishlistItems
+    controller: ShopBundle\Controller\WishlistItemController::wishlistWishlistItemsListAction
     methods: GET
 
 shop_wishlist_item_new:
-    path: /wishlistItem/new
+    path: /api/wishlistItem/new
     controller: ShopBundle\Controller\WishlistItemController::newAction
     methods: POST
 
 shop_wishlist_item_edit:
-    path: /wishlistItem/{id}/edit
+    path: /api/wishlistItem/{id}/edit
     controller: ShopBundle\Controller\WishlistItemController::editAction
     methods: PUT
 
 shop_wishlist_item_delete:
-    path: /wishlistItem/{id}/delete
+    path: /api/wishlistItem/{id}/delete
     controller: ShopBundle\Controller\WishlistItemController::deleteAction
     methods: DELETE

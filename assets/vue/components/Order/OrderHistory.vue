@@ -17,7 +17,7 @@ const getOrders = () => {
 
 onMounted(() => {
     UserService
-        .list()
+        .show()
         .then((response) => {
             user.value = response.data.data;
         })

@@ -86,7 +86,7 @@ const removeItem = (index) => {
 onMounted(() => {
     getCartItems();
     UserService
-        .list()
+        .show()
         .then((response) => {
             user.value = response.data.data;
         })
@@ -130,7 +130,7 @@ onMounted(() => {
                         <span class="text-2xl font-bold text-slate-900">${{ cartStore.totalPrice.toFixed(2) }}</span>
                     </div>
                     <div class="text-center">
-                        <a :href="FosJsRouting.generate('shop_order_show')"
+                        <a :href="FosJsRouting.generate('shop_order_list')"
                            class="w-full bg-slate-900 text-white p-4 rounded-xl font-semibold hover:bg-slate-800 transition-all shadow-lg">
                             Proceed to Checkout
                         </a>

@@ -91,7 +91,7 @@ const togglePasswordVisibility = () => {
                 </div>
 
                 <div class="text-center">
-                    <a :href="FosJsRouting.generate('user_registration_register')" class="text-indigo-600 hover:text-indigo-700 font-medium transition">
+                    <a :href="FosJsRouting.generate('user_registration_show')" class="text-indigo-600 hover:text-indigo-700 font-medium transition">
                         Create one now
                     </a>
                 </div>

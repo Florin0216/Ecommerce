@@ -25,16 +25,16 @@ class RegistrationController extends AbstractController
     {
     }
 
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function showAction(): Response
+    {
+        return $this->render('@User/Registration/register.html.twig');
+    }
+
+    public function newAction(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
+
         $form = $this->formFactory->getCreateForm($user);
-
-        $isHtmlRequest = $request->getRequestFormat() === 'html';
-
-        if ($isHtmlRequest) {
-            return $this->render('@User/Registration/register.html.twig');
-        }
 
         $payload = json_decode($request->getContent(), true);
         $form->submit($payload['data'] ?? []);

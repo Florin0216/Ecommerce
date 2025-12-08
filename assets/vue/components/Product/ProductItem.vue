@@ -64,7 +64,7 @@ const addToCart = (product) => {
 
 <template>
     <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
-        <a :href="FosJsRouting.generate('shop_product_show',{id: props.product.id})">
+        <a :href="FosJsRouting.generate('shop_product_product_show',{id: props.product.id})">
             <div class="relative overflow-hidden bg-gray-200 aspect-square">
                 <img v-if="product.image"
                      :src="product.image"

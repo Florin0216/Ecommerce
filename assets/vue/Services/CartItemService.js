@@ -6,7 +6,7 @@ class CartItemService{
     list(cartId,args = {}){
         args.id = cartId;
 
-        const requestUrl = FosJsRouting.generate('shop_cart_item_list', args);
+        const requestUrl = FosJsRouting.generate('shop_cart_item_cart_cart_items_list', args);
 
         return axios
             .get(requestUrl);

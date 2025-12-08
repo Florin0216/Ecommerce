@@ -17,7 +17,7 @@ class Order
 {
     const ENTITY_ALIAS = 'order';
 
-    const NORMALIZER_GROUPS = ['order.details', 'bil.details', 'shp.details', 'payment.details', 'delivery.details'];
+    const NORMALIZER_GROUPS = ['order.details', 'bil.details', 'shp.details', 'payment.details', 'delivery.details', 'user.details'];
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -39,6 +39,7 @@ class Order
     protected ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
+    #[Groups('user.details')]
     protected ?User $user = null;
 
     #[ORM\ManyToOne(targetEntity: Billing::class)]

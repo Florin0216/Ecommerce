@@ -16,7 +16,7 @@ const props = defineProps({
     }
 })
 
-const user = ref();
+const user = ref(null);
 const reviews = ref([]);
 const userOrderProducts = ref([]);
 
@@ -27,15 +27,17 @@ const getReviews = () => {
 }
 
 const getUserOrderItems = () => {
-    OrderService.list(user.value).then((orderResponse) => {
-        const filteredOrders = orderResponse.data.data.filter(o => o.status === 'completed');
+    if(user.value){
+        OrderService.list(user.value).then((orderResponse) => {
+            const filteredOrders = orderResponse.data.data.filter(o => o.status === 'completed');
 
-        const itemPromises = filteredOrders.map(order => OrderItemService.list(order));
+            const itemPromises = filteredOrders.map(order => OrderItemService.list(order));
 
-        return Promise.all(itemPromises);
-    }).then((responses) => {
-        userOrderProducts.value = responses.flatMap(r => r.data.data);
-    })
+            return Promise.all(itemPromises);
+        }).then((responses) => {
+            userOrderProducts.value = responses.flatMap(r => r.data.data);
+        })
+    }
 }
 
 const openReviewModal = (review = null, isEditing = false) => {
@@ -98,7 +100,7 @@ const onDelete = (review) => {
 
 onMounted(() => {
     UserService
-        .list()
+        .show()
         .then((response) => {
             user.value = response.data.data;
             getUserOrderItems();

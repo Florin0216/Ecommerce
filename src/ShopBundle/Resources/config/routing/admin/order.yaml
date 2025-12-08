@@ -1,0 +1,11 @@
+
+admin_shop_order_list:
+    path: /orders
+    controller: ShopBundle\Controller\OrderController::listAdminAction
+    methods: GET
+
+admin_shop_order_orders_list:
+    path: /api/orders
+    controller: ShopBundle\Controller\OrderController::ordersListAdminAction
+    methods: GET
+

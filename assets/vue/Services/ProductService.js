@@ -2,8 +2,16 @@ import FosJsRouting from "../../js/fosJsRouting";
 import axios from "axios";
 
 class ProductService {
-    productsList(args = {}) {
+    listAdmin(args = {}) {
         const requestUrl = FosJsRouting.generate('shop_product_products_list', args);
+
+        return axios
+            .get(requestUrl)
+            .catch(err => console.error(err));
+    }
+
+    list(categoryId, args){
+        const requestUrl = FosJsRouting.generate('shop_product_category_products_list', args);
 
         return axios
             .get(requestUrl)

@@ -5,3 +5,7 @@ admin_shop_product_import:
 admin_shop_category_import:
     resource: "@ShopBundle/Resources/config/routing/admin/category.yaml"
     prefix: /
+
+admin_shop_order_import:
+    resource: "@ShopBundle/Resources/config/routing/admin/order.yaml"
+    prefix: /

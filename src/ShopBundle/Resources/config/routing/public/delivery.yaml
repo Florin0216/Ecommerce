@@ -1,4 +1,4 @@
-shop_delivery_list:
-    path: /delivery
-    controller: ShopBundle\Controller\DeliveryController::listAction
+shop_delivery_deliveries_list:
+    path: /api/delivery
+    controller: ShopBundle\Controller\DeliveryController::deliveriesListAction
     methods: GET

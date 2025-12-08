@@ -1,44 +1,18 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import ModalService from "../../../Services/ModalService";
-import ToastService from "../../../Services/ToastService";
-import CategoryService from "../../../Services/CategoryService";
-import CategoryModal from "./CategoryModal.vue";
-import CategoryModel from "../../../models/CategoryModel";
+import OrderService from "../../../Services/OrderService";
 
-const categories = ref([]);
+const orders = ref([]);
 
-const getCategories = () => {
-    CategoryService.categoriesList().then((response) => {
-        categories.value = response.data.data;
-    });
-};
-
-const openCategoryModal = (category = null, isEditing = false) => {
-    ModalService.open({
-        component: CategoryModal,
-        props: {
-            category: category ?? new CategoryModel(),
-            isEditing: isEditing,
-        },
-    }).then(() => {
-        getCategories();
-    });
-};
-
-const onDelete = (category) => {
-    CategoryService.deleteAdmin(category).then(() => {
-        const index = categories.value.findIndex((c) => c.id === category.id);
-        if (index !== -1) {
-            categories.value.splice(index, 1);
-        }
-        ToastService.show("Category deleted successfully!", "success");
+const getOrders = () => {
+    OrderService.listAdmin().then((response) => {
+        orders.value = response.data.data;
     });
 };
 
 onMounted(() => {
-    getCategories();
-});
+    getOrders();
+})
 </script>
 
 <template>
@@ -48,69 +22,76 @@ onMounted(() => {
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div>
                         <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
-                            Categories
+                            Orders
                         </h1>
-                        <p class="text-slate-600">
-                            Manage your product categories
-                        </p>
                     </div>
-                    <button
-                        @click="openCategoryModal()"
-                        class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                    >
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                        </svg>
-                        Add Category
-                    </button>
                 </div>
             </div>
             <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
-                <div v-if="categories.length > 0" class="overflow-x-auto">
+                <div v-if="orders.length > 0" class="overflow-x-auto">
                     <table class="w-full min-w-max">
                         <thead>
                         <tr class="bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap">
+                            <th class="px-3 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap">
                                 ID
                             </th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap">
-                                Name
+                            <th class="px-3 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap">
+                                Total
                             </th>
                             <th class="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">
-                                Description
+                                User
                             </th>
-                            <th class="px-4 py-3 text-right text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap">
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">
+                                Status
+                            </th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">
+                                Created At
+                            </th>
+                            <th class="px-3 py-3 text-right text-xs font-semibold text-slate-700 uppercase tracking-wider whitespace-nowrap">
                                 Actions
                             </th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                         <tr
-                            v-for="category in categories"
-                            :key="category.id"
+                            v-for="order in orders"
+                            :key="order.id"
                             class="hover:bg-slate-50 transition-colors duration-150"
                         >
-                            <td class="px-4 py-3 whitespace-nowrap">
+                            <td class="px-3 py-3 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <span class="text-sm font-medium text-slate-900">
-                                        #{{ category.id }}
+                                        #{{ order.id }}
                                     </span>
                                 </div>
                             </td>
-                            <td class="px-4 py-3 whitespace-nowrap">
+                            <td class="px-3 py-3 whitespace-nowrap">
                                 <div class="text-sm font-semibold text-slate-900">
-                                    {{ category.name }}
+                                    ${{ order.total.toFixed(2) }}
                                 </div>
                             </td>
                             <td class="px-4 py-3 hidden sm:table-cell">
                                 <div class="text-sm text-slate-600 max-w-xs truncate">
-                                    {{ category.description }}
+                                    {{ order.user.firstName }} {{ order.user.lastName }}
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 hidden sm:table-cell">
+                                <div class="text-sm text-slate-600 max-w-xs truncate">
+                                    {{ order.status }}
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 hidden sm:table-cell">
+                                <div class="text-sm text-slate-600 max-w-xs truncate">
+                                    {{
+                                        new Date(order.createdAt + 'Z').toLocaleDateString('en-US', {
+                                            dateStyle: 'medium',
+                                        })
+                                    }}
                                 </div>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap text-right">
                                 <div class="flex items-center justify-end gap-2">
                                     <button
-                                        @click="openCategoryModal(category, true)"
                                         class="inline-flex items-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-lg transition-colors duration-200"
                                         title="Edit"
                                     >
@@ -122,7 +103,6 @@ onMounted(() => {
                                         <span class="hidden md:inline">Edit</span>
                                     </button>
                                     <button
-                                        @click="onDelete(category)"
                                         class="inline-flex items-center px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-medium rounded-lg transition-colors duration-200"
                                         title="Delete"
                                     >
@@ -142,28 +122,9 @@ onMounted(() => {
 
                 <div v-else class="p-8 md:p-12 text-center">
                     <div class="max-w-md mx-auto">
-                        <div class="w-16 h-16 md:w-20 md:h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 md:w-10 md:h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                            </svg>
-                        </div>
                         <h3 class="text-lg md:text-xl font-semibold text-slate-800 mb-2">
-                            No categories yet
+                            No orders yet
                         </h3>
-                        <p class="text-slate-600 mb-6 text-sm md:text-base">
-                            Get started by creating your first category to organize your products.
-                        </p>
-                        <button
-                            @click="openCategoryModal()"
-                            class="inline-flex items-center justify-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl text-sm md:text-base"
-                        >
-                            <svg class="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 4v16m8-8H4"/>
-                            </svg>
-                            Create First Category
-                        </button>
                     </div>
                 </div>
             </div>

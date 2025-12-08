@@ -31,7 +31,7 @@ const toggleUserDropdown = () => {
 };
 
 onMounted(() => {
-    UserService.list().then((response) => {
+    UserService.show().then((response) => {
         user.value = response.data.data;
 
         if (user.value && !cartStore.isInitialized && user.value.roles[0] !== 'ROLE_ADMIN') {
@@ -151,9 +151,9 @@ onMounted(() => {
                 class="lg:flex lg:flex-row md:items-center font-medium text-lg fixed lg:static top-20 left-0 w-xs lg:w-auto h-screen lg:h-auto bg-gray-800 lg:bg-transparent pt-5 lg:pt-0 z-40 transition-transform duration-300 ease-in-out"
                 :class="isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
             >
-                <ul class="flex flex-col lg:flex-row lg:gap-4 items-start">
+                <ul class="flex flex-col lg:flex-row lg:gap-4 items-start w-full">
                     <li><a href="" class="hover:text-yellow-300 lg:duration-300 px-4 py-2 block">About</a></li>
-                    <li>
+                    <li class="w-full">
                         <category-dropdown :isOpen="isOpen"></category-dropdown>
                     </li>
                 </ul>

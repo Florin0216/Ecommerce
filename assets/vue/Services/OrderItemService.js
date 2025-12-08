@@ -6,7 +6,7 @@ class OrderItemService{
     list(order,args = {}){
         args.id = order.id;
 
-        const requestUrl = FosJsRouting.generate('shop_order_item_list', args);
+        const requestUrl = FosJsRouting.generate('shop_order_item_order_order_items_list', args);
 
         return axios
             .get(requestUrl);

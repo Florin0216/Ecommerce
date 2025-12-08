@@ -2,7 +2,7 @@ import FosJsRouting from "../../js/fosJsRouting";
 import axios from "axios";
 
 class UserService{
-    list(args = {}) {
+    show(args = {}) {
         let requestUrl = FosJsRouting.generate('public_user_user_show', args);
 
         return axios

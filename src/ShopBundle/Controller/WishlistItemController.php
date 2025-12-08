@@ -24,7 +24,7 @@ class WishlistItemController extends AbstractController
     {
     }
 
-    public function listAction($id):Response
+    public function wishlistWishlistItemsListAction($id):Response
     {
         $wishlistItems = $this->entityManager->getRepository(WishlistItem::class)->findBy(['wishlist' => $id]);
 

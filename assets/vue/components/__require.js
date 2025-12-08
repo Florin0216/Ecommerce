@@ -13,6 +13,7 @@ import OrderCancel from "./Order/OrderCancel.vue";
 import OrderSuccess from "./Order/OrderSuccess.vue";
 import WishlistShow from "./Wishlist/WishlistShow.vue";
 import OrderHistory from "./Order/OrderHistory.vue";
+import OrdersListAdmin from "./Order/admin/OrdersListAdmin.vue";
 
 app.component('navbar',Navbar);
 app.component('sidebar',Sidebar);
@@ -28,3 +29,4 @@ app.component('order-cancel',OrderCancel);
 app.component('order-success',OrderSuccess);
 app.component('wishlist-show',WishlistShow);
 app.component('order-history',OrderHistory);
+app.component('orders-list-admin',OrdersListAdmin);

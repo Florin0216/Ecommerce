@@ -1,4 +1,4 @@
 public_user_user_show:
-    path: /users/show
+    path: /api/users/show
     controller: UserBundle\Controller\UserController::showAction
     methods: GET

@@ -6,7 +6,7 @@ class WishlistItemService {
     list(wishlistId,args = {}){
         args.id = wishlistId;
 
-        const requestUrl = FosJsRouting.generate('shop_wishlist_item_list', args);
+        const requestUrl = FosJsRouting.generate('shop_wishlist_item_wishlist_wishlist_items_list', args);
 
         return axios
             .get(requestUrl);

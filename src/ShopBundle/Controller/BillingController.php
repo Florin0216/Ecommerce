@@ -26,7 +26,7 @@ class BillingController extends AbstractController
     }
 
 
-    public function listAction($id, Request $request): Response
+    public function userBillingsListAction($id, Request $request): Response
     {
         $billings = $this->entityManager->getRepository(Billing::class)->findBy(['user' => $id]);
 

@@ -6,7 +6,14 @@ class OrderService{
     list(user,args = {}){
         args.id = user.id;
 
-        const requestUrl = FosJsRouting.generate('shop_order_list', args);
+        const requestUrl = FosJsRouting.generate('shop_order_user_orders_list', args);
+
+        return axios
+            .get(requestUrl);
+    }
+
+    listAdmin(args={}){
+        const requestUrl = FosJsRouting.generate('admin_shop_order_orders_list', args);
 
         return axios
             .get(requestUrl);

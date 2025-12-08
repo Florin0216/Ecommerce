@@ -14,7 +14,7 @@ const userData = ref({});
 
 const handleSubmit = () => {
     RegistrationService
-        .register(new RegisterDto(userData.value))
+        .new(new RegisterDto(userData.value))
         .then((response) => {
             return Promise.all([
                 CartService.new(new CartCreateDto({

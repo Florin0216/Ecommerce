@@ -4,16 +4,16 @@ admin_shop_product_list:
     methods: GET
 
 admin_shop_product_new:
-    path: /products/new
+    path: /api/products/new
     controller: ShopBundle\Controller\ProductController::newAdminAction
     methods: POST
 
 admin_shop_product_edit:
-    path: /products/{id}/edit
+    path: /api/products/{id}/edit
     controller: ShopBundle\Controller\ProductController::editAdminAction
     methods: PUT
 
 admin_shop_product_delete:
-    path: /products/{id}/delete
+    path: /api/products/{id}/delete
     controller: ShopBundle\Controller\ProductController::deleteAdminAction
     methods: DELETE

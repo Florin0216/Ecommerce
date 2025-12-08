@@ -29,7 +29,7 @@ class CartController extends AbstractController
         return $this->render('@Shop/Cart/public/show.html.twig');
     }
 
-    public function listAction($id): Response
+    public function userCartShowAction($id): Response
     {
         $cart = $this->entityManager->getRepository(Cart::class)->findOneBy(['user' => $id]);
 

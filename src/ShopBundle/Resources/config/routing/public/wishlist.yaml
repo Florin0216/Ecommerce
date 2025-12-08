@@ -4,17 +4,17 @@ shop_wishlist_show:
     controller: ShopBundle\Controller\WishlistController::showAction
     methods: GET
 
-shop_wishlist_list:
-    path: user/{id}/wishlist
-    controller: ShopBundle\Controller\WishlistController::listAction
+shop_wishlist_user_wishlist_show:
+    path: /api/user/{id}/wishlist
+    controller: ShopBundle\Controller\WishlistController::userWishlistShowAction
     methods: GET
 
 shop_wishlist_new:
-    path: /wishlist/new
+    path: /api/wishlist/new
     controller: ShopBundle\Controller\WishlistController::newAction
     methods: POST
 
 shop_wishlist_edit:
-    path: /wishlist/{id}/edit
+    path: /api/wishlist/{id}/edit
     controller: ShopBundle\Controller\WishlistController::editAction
     methods: PUT

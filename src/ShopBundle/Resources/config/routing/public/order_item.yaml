@@ -1,20 +1,20 @@
 
-shop_order_item_list:
-    path: /order/{id}/orderItems
-    controller: ShopBundle\Controller\OrderItemController::listAction
+shop_order_item_order_order_items_list:
+    path: /api/order/{id}/orderItems
+    controller: ShopBundle\Controller\OrderItemController::orderOrderItemsListAction
     methods: GET
 
 shop_order_item_new:
-    path: /orderItem/new
+    path: /api/orderItem/new
     controller: ShopBundle\Controller\OrderItemController::newAction
     methods: POST
 
 shop_order_item_edit:
-    path: /orderItem/{id}/edit
+    path: /api/orderItem/{id}/edit
     controller: ShopBundle\Controller\OrderItemController::editAction
     methods: PUT
 
 shop_order_item_delete:
-    path: /orderItem/{id}/delete
+    path: /api/orderItem/{id}/delete
     controller: ShopBundle\Controller\OrderItemController::deleteAction
     methods: DELETE

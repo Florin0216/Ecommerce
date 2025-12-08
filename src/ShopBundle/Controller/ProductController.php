@@ -37,7 +37,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    public function listAction($id, Request $request): Response
+    public function categoryProductsListAction($id, Request $request): Response
     {
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['id' => $id]);
 
@@ -49,9 +49,10 @@ class ProductController extends AbstractController
         ]);
     }
 
-    public function showAction($id, Request $request): Response
+    public function productShowAction($id, Request $request): Response
     {
         $product = $this->entityManager->getRepository(Product::class)->findOneBy(['id' => $id]);
+
         return $this->render('@Shop/Product/public/show.html.twig', [
             'product' => $this->serializer->normalize($product, null, [
                 AbstractNormalizer::GROUPS => Product::NORMALIZER_GROUPS,

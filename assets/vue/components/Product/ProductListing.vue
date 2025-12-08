@@ -15,7 +15,7 @@ const props = defineProps({
 
 onMounted(() => {
     UserService
-        .list()
+        .show()
         .then((response) => {
             user.value = response.data.data;
         })
@@ -27,7 +27,6 @@ onMounted(() => {
         <div class="max-w-7xl mx-auto">
             <div class="mb-8">
                 <h1 class="text-4xl font-bold text-gray-900 mb-2">Our Products</h1>
-                <p class="text-gray-600">Discover our curated collection</p>
             </div>
 
             <div v-if="props.products.length"
